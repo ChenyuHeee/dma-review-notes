@@ -410,8 +410,8 @@
   </table>
   <p><strong>最短路径</strong>：A → C → B → D → E → F，长度 = 2+1+5+2+3 = <strong>13</strong></p>
 
-  <p><strong>(b)</strong> 度数：deg(A)=2, deg(B)=3, deg(C)=3, deg(D)=3, deg(E)=3, deg(F)=2</p>
-  <p>4 个奇度顶点（B,C,D,E）→ <strong>无 Euler circuit，无 Euler path</strong>。</p>
+  <p><strong>(b)</strong> 度数：deg(A)=2, deg(B)=3, deg(C)=4, deg(D)=4, deg(E)=3, deg(F)=2。C 连接 A,B,D,E；D 连接 B,C,E,F。</p>
+  <p>2 个奇度顶点（B 和 E）→ <strong>无 Euler circuit，但存在 Euler path</strong>（B→A→C→B→D→C→E→D→F→E）。</p>
   <p>Dirac: $\min\deg = 3 \ge 6/2 = 3$，满足 Dirac 条件 → <strong>存在 Hamilton circuit</strong>。路径：A→B→D→F→E→C→A。</p>
 
   <hr style="margin:20px 0">
