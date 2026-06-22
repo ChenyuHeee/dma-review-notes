@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DMA 离散数学 — 摸底卷 + 复习规划</title>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  :root {
+    --bg: #f8f9fa;
+    --card: #fff;
+    --text: #212529;
+    --muted: #6c757d;
+    --border: #dee2e6;
+    --accent: #2563eb;
+    --green: #16a34a;
+    --red: #dc2626;
+    --amber: #d97706;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+    color: #fff; padding: 48px 20px; text-align: center; margin-bottom: 32px;
+  }
+  header h1 { font-size: 2rem; margin-bottom: 8px; }
+  header p { opacity: 0.85; font-size: 0.95rem; }
+
+  .card { background: var(--card); border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 28px 32px; margin-bottom: 24px; }
+  .card h2 { font-size: 1.3rem; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+  .card h3 { font-size: 1.05rem; margin: 20px 0 10px; color: var(--accent); }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9rem; }
+  th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: #f1f5f9; font-weight: 600; }
+  tr:hover { background: #f8fafc; }
+
+  .tf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 0.9rem; }
+  .tf-item { padding: 6px 0; border-bottom: 1px dotted var(--border); }
+
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; font-weight: 600; }
+  .badge-ch { background: #dbeafe; color: #1e40af; }
+  .badge-ans { background: #fef3c7; color: #92400e; }
+  .badge-t { background: #dcfce7; color: #166534; }
+  .badge-f { background: #fee2e2; color: #991b1b; }
+
+  .step { margin: 4px 0 4px 16px; padding: 4px 0; }
+  .step-num { display: inline-block; width: 22px; height: 22px; line-height: 22px; text-align: center; background: var(--accent); color: #fff; border-radius: 50%; font-size: 0.75rem; margin-right: 8px; }
+
+  details { margin: 12px 0; }
+  summary { cursor: pointer; color: var(--accent); font-weight: 600; padding: 4px 0; }
+  summary:hover { text-decoration: underline; }
+
+  .stat { text-align: center; padding: 16px; }
+  .stat-val { font-size: 2rem; font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 0.85rem; color: var(--muted); }
+
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+  .tl-item { position: relative; margin-bottom: 20px; }
+  .tl-dot { position: absolute; left: -20px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--accent); }
+  .tl-date { font-weight: 700; color: var(--accent); }
+  .tl-title { font-weight: 600; }
+
+  .section-divider { border: none; border-top: 2px dashed var(--border); margin: 36px 0; }
+
+  .pagebreak { page-break-before: always; }
+
+  @media print {
+    body { background: #fff; font-size: 11pt; }
+    .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+    header { background: #1e3a5f !important; -webkit-print-color-adjust: exact; }
+    .pagebreak { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>DMA 离散数学理论基础</h1>
+  <p>摸底考试卷 + 详细题解 + 6 天复习规划</p>
+  <p style="font-size:0.85rem;margin-top:8px">郑文庭老师班 · Rosen 8th Edition · 2026 春夏期末</p>
+</header>
+
+<div class="container">
+
+<!-- ==================== STUDY PLAN ==================== -->
+<div class="card" id="plan">
+  <h2>📋 复习规划（6/22 — 6/28）</h2>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
+    <div class="stat"><div class="stat-val">6</div><div class="stat-label">天复习时间</div></div>
+    <div class="stat"><div class="stat-val">11</div><div class="stat-label">个考试章节</div></div>
+    <div class="stat"><div class="stat-val">3-4h</div><div class="stat-label">每天 DMA 时间</div></div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">6/22（今天）</div>
+      <div class="tl-title">摸底定位</div>
+      <p>做摸底卷（90min）→ 对答案 → 确定 Top 3 薄弱章节 → 晚上过薄弱笔记</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">6/23 上午</div>
+      <div class="tl-title">突击薄弱点</div>
+      <p>针对昨天薄弱章节做对应 Quiz 题 → 浏览 Ch10-11 定理清单</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--red);box-shadow:0 0 0 2px var(--red)"></div>
+      <div class="tl-date">6/23 下午</div>
+      <div class="tl-title">🎯 学校期末模拟考</div>
+      <p>认真对待，记录时间分配和不会的题 → 晚上复盘错题</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">6/24</div>
+      <div class="tl-title">数理逻辑 + 数论 + 归纳</div>
+      <p>Ch1 NAND/CNF/DNF → Ch4 Euclidean/CRT/费马 → Ch5 强归纳法模板 → 刷 Quiz1-2024/2025</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">6/25</div>
+      <div class="tl-title">计数 + 递推 + 生成函数</div>
+      <p>Ch6 排列组合 4 类总结 → Ch8 齐次/非齐次模板 → 刷 Quiz2 + Quiz4 前三题</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">6/26</div>
+      <div class="tl-title">关系 + 图论 + 树</div>
+      <p>Ch9 Hasse/Warshall/等价类 → Ch10 Euler/Hamilton/Dijkstra/平面图 → Ch11 Prim/Kruskal/Huffman → 刷 Quiz3-2024</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">6/27</div>
+      <div class="tl-title">总复习</div>
+      <p>错题重做 → 公式默写 → Network Flow 快速浏览 → 看期末回忆卷</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--red);box-shadow:0 0 0 2px var(--red)"></div>
+      <div class="tl-date">6/28 上午</div>
+      <div class="tl-title">🏁 期末考试</div>
+      <p>考前 30min：公式速查 → 先易后难 → T/F 不会就空着</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px">章节优先级</h3>
+  <table>
+    <tr><th>优先级</th><th>章节</th><th>原因</th></tr>
+    <tr><td>⭐⭐⭐</td><td>Ch10 Graphs</td><td>分值最高，Euler/Hamilton/Dijkstra/平面图必考</td></tr>
+    <tr><td>⭐⭐⭐</td><td>Ch1 Logic</td><td>NAND/CNF/DNF/量词每年必出</td></tr>
+    <tr><td>⭐⭐⭐</td><td>Ch5 Induction</td><td>至少一道大题，强归纳法/普通归纳法都要会</td></tr>
+    <tr><td>⭐⭐</td><td>Ch11 Trees</td><td>Prim/Kruskal/Huffman 算法题必有一道</td></tr>
+    <tr><td>⭐⭐</td><td>Ch4 Number Theory</td><td>CRT/费马小定理可能出</td></tr>
+    <tr><td>⭐⭐</td><td>Ch9 Relations</td><td>Hasse/Warshall/等价类几乎必考</td></tr>
+    <tr><td>⭐⭐</td><td>Ch6 Counting</td><td>排列组合难度适中但易错</td></tr>
+    <tr><td>⭐</td><td>Ch8 Recurrence</td><td>递推求解套路固定</td></tr>
+    <tr><td>⭐</td><td>Ch2 Sets</td><td>概念题为主</td></tr>
+    <tr><td>⭐</td><td>Ch3 Algorithms</td><td>Big-O 判断 1-2 道小题</td></tr>
+    <tr><td>⭐</td><td>Network Flow</td><td>可能 1 题，FF 基本概念</td></tr>
+  </table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== EXAM ==================== -->
+<div class="card pagebreak" id="exam">
+  <h2>📝 DMA 摸底考试卷</h2>
+  <p style="color:var(--muted)">满分 100 分 | 时间 90 分钟 | 范围：Ch1-6, Ch8-11 + Network Flow</p>
+
+  <!-- ======== PART 1 ======== -->
+  <h3>Part 1: True/False (30%，每题 3 分)</h3>
+  <p style="color:var(--red);margin-bottom:12px">⚠️ 答对 +3，空白 0，答错 −1（倒扣制）</p>
+
+  <p><strong>Ch1 Logic &amp; Proofs</strong></p>
+  <div class="tf-grid">
+    <div class="tf-item"><strong>Q1.</strong> $\forall x \exists y P(x,y) \equiv \exists y \forall x P(x,y)$</div>
+    <div class="tf-item"><strong>Q2.</strong> $\neg\forall x(P(x)\to Q(x)) \equiv \exists x(P(x)\land\neg Q(x))$</div>
+    <div class="tf-item"><strong>Q3.</strong> $(p\to q)\land(p\to r) \equiv p\to(q\land r)$</div>
+  </div>
+
+  <p style="margin-top:12px"><strong>Ch2 Sets &amp; Functions</strong></p>
+  <div class="tf-grid">
+    <div class="tf-item"><strong>Q4.</strong> $|A\times B|=|A|\cdot|B|$ for any finite sets $A,B$</div>
+    <div class="tf-item"><strong>Q5.</strong> If $f:A\to B$ and $g:B\to C$ are both injective, then $g\circ f$ is injective</div>
+    <div class="tf-item"><strong>Q6.</strong> The set of all finite subsets of $\mathbb{N}$ is countable</div>
+  </div>
+
+  <p style="margin-top:12px"><strong>Ch3 Algorithms</strong></p>
+  <div class="tf-grid">
+    <div class="tf-item"><strong>Q7.</strong> If $f(n)=3n^2+2n+1$, then $f(n)=\Theta(n^2)$</div>
+    <div class="tf-item"><strong>Q8.</strong> $n! = O(2^n)$</div>
+  </div>
+
+  <p style="margin-top:12px"><strong>Ch4 Number Theory</strong></p>
+  <div class="tf-grid">
+    <div class="tf-item"><strong>Q9.</strong> If $a\equiv b\pmod{m}$ and $c\equiv d\pmod{m}$, then $ac\equiv bd\pmod{m}$</div>
+    <div class="tf-item"><strong>Q10.</strong> $\gcd(a,b)\cdot\operatorname{lcm}(a,b)=ab$ for all $a,b>0$</div>
+  </div>
+
+  <p style="margin-top:12px"><strong>Ch5 Induction</strong></p>
+  <div class="tf-grid">
+    <div class="tf-item"><strong>Q11.</strong> Well-Ordering Principle $\iff$ Mathematical Induction</div>
+    <div class="tf-item"><strong>Q12.</strong> In strong induction, to prove $P(n)$ we assume $P(k)$ for all $k<n$</div>
+  </div>
+
+  <p style="margin-top:12px"><strong>Ch6 Counting</strong></p>
+  <div class="tf-grid">
+    <div class="tf-item"><strong>Q13.</strong> $C(n,r)=P(n,r)/r!$ for all $0\le r\le n$</div>
+    <div class="tf-item"><strong>Q14.</strong> Among any 13 people, at least 2 share a birth month</div>
+  </div>
+
+  <p style="margin-top:12px"><strong>Ch8 Recurrence Relations</strong></p>
+  <div class="tf-grid">
+    <div class="tf-item"><strong>Q15.</strong> The characteristic eqn of $a_n=3a_{n-1}-2a_{n-2}$ has roots $1$ and $2$</div>
+    <div class="tf-item"><strong>Q16.</strong> The number of derangements of $n$ objects is approx $n!/e$</div>
+  </div>
+
+  <p style="margin-top:12px"><strong>Ch9 Relations</strong></p>
+  <div class="tf-grid">
+    <div class="tf-item"><strong>Q17.</strong> Every equivalence relation on $A$ partitions $A$</div>
+    <div class="tf-item"><strong>Q18.</strong> A symmetric + transitive relation must also be reflexive</div>
+  </div>
+
+  <p style="margin-top:12px"><strong>Ch10 Graphs</strong></p>
+  <div class="tf-grid">
+    <div class="tf-item"><strong>Q19.</strong> $K_5$ is a planar graph</div>
+    <div class="tf-item"><strong>Q20.</strong> A connected multigraph has an Euler circuit iff every vertex has even degree</div>
+    <div class="tf-item"><strong>Q21.</strong> The chromatic number of a bipartite graph is at most 2</div>
+    <div class="tf-item"><strong>Q22.</strong> Every graph has an even number of odd-degree vertices</div>
+  </div>
+
+  <p style="margin-top:12px"><strong>Ch11 Trees &amp; Network Flow</strong></p>
+  <div class="tf-grid">
+    <div class="tf-item"><strong>Q23.</strong> Every tree with $n$ vertices has exactly $n-1$ edges</div>
+    <div class="tf-item"><strong>Q24.</strong> In a full binary tree, #leaves = #internal vertices + 1</div>
+    <div class="tf-item"><strong>Q25.</strong> By Max-Flow Min-Cut Theorem, max flow value = min cut capacity</div>
+  </div>
+
+  <!-- ======== PART 2 ======== -->
+  <h3 style="margin-top:28px">Part 2: Short Problems (40%)</h3>
+
+  <p><strong>Q26. (6%) Ch1</strong> — Write $p\oplus q$ using only the NAND operator $|$.</p>
+  <p style="margin-bottom:48px"></p>
+
+  <p><strong>Q27. (6%) Ch2</strong> — Let $A=\{1,2,3\}$, $B=\{2,3,4\}$. Compute:<br>
+  (a) $A\oplus B$ (symmetric difference)<br>
+  (b) $\mathcal{P}(A\cap B)$ (power set)</p>
+  <p style="margin-bottom:48px"></p>
+
+  <p><strong>Q28. (4%) Ch3</strong> — Order by growth rate (slowest first):<br>
+  $(\log n)^2,\; n\log n,\; n^2,\; 2^n,\; n!,\; n^{1/\log n}$</p>
+  <p style="margin-bottom:32px"></p>
+
+  <p><strong>Q29. (6%) Ch4</strong><br>
+  (a) Compute $\gcd(252,198)$ using the Euclidean algorithm.<br>
+  (b) Find Bézout coefficients: express $\gcd(252,198)$ as $s\cdot252+t\cdot198$.</p>
+  <p style="margin-bottom:64px"></p>
+
+  <p><strong>Q30. (6%) Ch5</strong> — Prove by induction: $\displaystyle\sum_{i=1}^{n}(2i-1)=n^2$ for all $n\ge 1$.</p>
+  <p style="margin-bottom:64px"></p>
+
+  <p><strong>Q31. (6%) Ch6</strong> — How many strings of 4 lowercase letters:<br>
+  (a) contain at least one 'a'?<br>
+  (b) have all letters distinct?<br>
+  (c) start with a vowel (a,e,i,o,u) and end with a consonant?</p>
+  <p style="margin-bottom:48px"></p>
+
+  <p><strong>Q32. (6%) Ch8</strong> — Solve: $a_n=5a_{n-1}-6a_{n-2}\;(n\ge 2)$, $a_0=2$, $a_1=7$.</p>
+  <p style="margin-bottom:48px"></p>
+
+  <!-- ======== PART 3 ======== -->
+  <h3 style="margin-top:28px">Part 3: Long Problems (30%)</h3>
+
+  <p><strong>Q33. (10%) Ch9 — Partial Order</strong><br>
+  Let $A=\{1,2,3,4,6,12\}$ with $aRb \iff a\mid b$.<br>
+  (a) Prove $R$ is a partial order.<br>
+  (b) Draw the Hasse diagram.<br>
+  (c) Find all maximal, minimal, maximum, and minimum elements.<br>
+  (d) Is $(A,R)$ a lattice? Justify.</p>
+  <p style="margin-bottom:80px"></p>
+
+  <p><strong>Q34. (10%) Ch10 — Graph Theory</strong><br>
+  Given a graph with edges: A-B:4, A-C:2, B-C:1, B-D:5, C-D:8, C-E:10, D-E:2, D-F:6, E-F:3.<br>
+  (a) Use Dijkstra's algorithm to find the shortest path from A to F. Show each step.<br>
+  (b) Euler circuit? Euler path? Hamilton circuit? Justify each.</p>
+  <p style="margin-bottom:80px"></p>
+
+  <p><strong>Q35. (10%) Ch11 — Huffman Coding</strong><br>
+  Frequencies: A:15%, B:25%, C:5%, D:20%, E:10%, F:25%.<br>
+  (a) Construct a Huffman code. Show the merging process.<br>
+  (b) Compute the average bits per symbol.<br>
+  (c) How many bits would a fixed-length code need?</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== ANSWERS ==================== -->
+<div class="card pagebreak" id="answers">
+  <h2>✅ 答案速查</h2>
+
+  <h3>Part 1 — T/F 答案</h3>
+  <table>
+    <tr><th>Q</th><th>Ans</th><th>章节</th><th>一句话理由</th></tr>
+    <tr><td>1</td><td><span class="badge badge-f">F</span></td><td>Ch1</td><td>$\forall\exists \not\equiv \exists\forall$，量词不可随意交换</td></tr>
+    <tr><td>2</td><td><span class="badge badge-t">T</span></td><td>Ch1</td><td>量词否定 + 蕴含展开的标准等价</td></tr>
+    <tr><td>3</td><td><span class="badge badge-t">T</span></td><td>Ch1</td><td>$(\neg p\lor q)\land(\neg p\lor r)\equiv\neg p\lor(q\land r)$</td></tr>
+    <tr><td>4</td><td><span class="badge badge-t">T</span></td><td>Ch2</td><td>笛卡尔积基数基本结论</td></tr>
+    <tr><td>5</td><td><span class="badge badge-t">T</span></td><td>Ch2</td><td>单射复合仍为单射</td></tr>
+    <tr><td>6</td><td><span class="badge badge-t">T</span></td><td>Ch2</td><td>可数个可数集的并可数</td></tr>
+    <tr><td>7</td><td><span class="badge badge-t">T</span></td><td>Ch3</td><td>$3n^2\le f(n)\le 6n^2$ for large $n$</td></tr>
+    <tr><td>8</td><td><span class="badge badge-f">F</span></td><td>Ch3</td><td>$n!$ 比任何 $c^n$ 增长都快</td></tr>
+    <tr><td>9</td><td><span class="badge badge-t">T</span></td><td>Ch4</td><td>同余式乘法性质</td></tr>
+    <tr><td>10</td><td><span class="badge badge-t">T</span></td><td>Ch4</td><td>$\gcd\cdot\operatorname{lcm}=ab$</td></tr>
+    <tr><td>11</td><td><span class="badge badge-t">T</span></td><td>Ch5</td><td>良序原理 $\iff$ 归纳法</td></tr>
+    <tr><td>12</td><td><span class="badge badge-t">T</span></td><td>Ch5</td><td>强归纳法的定义</td></tr>
+    <tr><td>13</td><td><span class="badge badge-t">T</span></td><td>Ch6</td><td>$C(n,r)=P(n,r)/r!$</td></tr>
+    <tr><td>14</td><td><span class="badge badge-t">T</span></td><td>Ch6</td><td>鸽巢原理标准例子</td></tr>
+    <tr><td>15</td><td><span class="badge badge-t">T</span></td><td>Ch8</td><td>$r^2-5r+6=(r-2)(r-3)=0$... 等等：Q15 是 $a_n=3a_{n-1}-2a_{n-2}$，方程为 $r^2-3r+2=(r-1)(r-2)=0$ ✓</td></tr>
+    <tr><td>16</td><td><span class="badge badge-t">T</span></td><td>Ch8</td><td>$D_n=n!\sum(-1)^i/i!\approx n!/e$</td></tr>
+    <tr><td>17</td><td><span class="badge badge-t">T</span></td><td>Ch9</td><td>等价关系 ↔ 划分</td></tr>
+    <tr><td>18</td><td><span class="badge badge-f">F</span></td><td>Ch9</td><td>反例：空关系对称+传递但不自反</td></tr>
+    <tr><td>19</td><td><span class="badge badge-f">F</span></td><td>Ch10</td><td>$K_5$: $e=10>3v-6=9$，非平面</td></tr>
+    <tr><td>20</td><td><span class="badge badge-t">T</span></td><td>Ch10</td><td>欧拉回路充要条件</td></tr>
+    <tr><td>21</td><td><span class="badge badge-t">T</span></td><td>Ch10</td><td>二部图 2-可着色</td></tr>
+    <tr><td>22</td><td><span class="badge badge-t">T</span></td><td>Ch10</td><td>握手定理推论</td></tr>
+    <tr><td>23</td><td><span class="badge badge-t">T</span></td><td>Ch11</td><td>树的基本性质</td></tr>
+    <tr><td>24</td><td><span class="badge badge-t">T</span></td><td>Ch11</td><td>满二叉树 $n_0=n_2+1$</td></tr>
+    <tr><td>25</td><td><span class="badge badge-t">T</span></td><td>NF</td><td>Max-Flow Min-Cut Theorem</td></tr>
+  </table>
+
+  <h3>Part 2 — 短题答案</h3>
+
+  <details open>
+  <summary><strong>Q26</strong> — NAND 表达 XOR</summary>
+  <p>$p\oplus q \equiv (p\mid(q\mid q))\mid((p\mid p)\mid q)$</p>
+  </details>
+
+  <details>
+  <summary><strong>Q27</strong> — 对称差与幂集</summary>
+  <p>(a) $A\oplus B = \{1,4\}$<br>(b) $A\cap B = \{2,3\}$, $\mathcal{P}(\{2,3\}) = \{\emptyset, \{2\}, \{3\}, \{2,3\}\}$</p>
+  </details>
+
+  <details>
+  <summary><strong>Q28</strong> — 函数增长率排序</summary>
+  <p>$n^{1/\log n}=2$ (常数!) &lt; $(\log n)^2$ &lt; $n\log n$ &lt; $n^2$ &lt; $2^n$ &lt; $n!$</p>
+  </details>
+
+  <details>
+  <summary><strong>Q29</strong> — 欧几里得算法</summary>
+  <p>(a) $252=1\cdot198+54$, $198=3\cdot54+36$, $54=1\cdot36+18$, $36=2\cdot18+0$. $\gcd=18$.</p>
+  <p>(b) $18 = 54-1\cdot36 = 54-1\cdot(198-3\cdot54) = 4\cdot54-1\cdot198 = 4(252-198)-198 = 4\cdot252-5\cdot198$</p>
+  </details>
+
+  <details>
+  <summary><strong>Q30</strong> — 归纳法证明</summary>
+  <p><strong>Basis</strong> ($n=1$): $1=1^2$ ✓</p>
+  <p><strong>Inductive</strong>: $\sum_{i=1}^{k+1}(2i-1) = k^2 + (2k+1) = (k+1)^2$ ✓</p>
+  </details>
+
+  <details>
+  <summary><strong>Q31</strong> — 字符串计数</summary>
+  <p>(a) $26^4-25^4 = 66351$<br>(b) $P(26,4) = 358800$<br>(c) $5\cdot21\cdot26^2 = 70980$</p>
+  </details>
+
+  <details>
+  <summary><strong>Q32</strong> — 递推求解</summary>
+  <p>特征方程 $r^2-5r+6=0$, $r=2,3$. $a_n=\alpha\cdot2^n+\beta\cdot3^n$. 代入得 $a_n = 3\cdot3^n - 2^n = 3^{n+1}-2^n$.</p>
+  </details>
+</div>
+
+<div class="card pagebreak" id="answers-long">
+  <h2>📖 Part 3 — 大题详细题解</h2>
+
+  <h3>Q33 — 偏序关系 (Ch9)</h3>
+  <p><strong>(a)</strong> 自反：$a\mid a$ ✓ | 反对称：$a\mid b$ 且 $b\mid a \Rightarrow a=b$ ✓ | 传递：$a\mid b$ 且 $b\mid c \Rightarrow a\mid c$ ✓</p>
+
+  <p><strong>(b)</strong> Hasse 图 (省略传递边与自环)：</p>
+  <pre style="background:#f8fafc;padding:16px;border-radius:8px;font-size:0.9rem">
+          12
+         /  \
+        6    4
+       / \   |
+      2   3  |
+       \ /   |
+        1 ---┘
+  </pre>
+  <p>边：1→2, 1→3, 2→6, 3→6, 2→4, 6→12, 4→12</p>
+
+  <p><strong>(c)</strong> 极大元 = {12}，最大元 = 12。极小元 = {1}，最小元 = 1。</p>
+
+  <p><strong>(d)</strong> 是 lattice。$\operatorname{lub}(a,b)=\operatorname{lcm}(a,b)$, $\operatorname{glb}(a,b)=\gcd(a,b)$。A 对 lcm/gcd 封闭：任意两元素的 lcm 和 gcd 都在 A 中。事实上任何正整数的正因子集按整除关系都是 lattice。</p>
+
+  <hr style="margin:20px 0">
+
+  <h3>Q34 — 图论综合 (Ch10)</h3>
+  <p><strong>(a) Dijkstra 算法</strong></p>
+  <table>
+    <tr><th>Step</th><th>已确定</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+    <tr><td>0</td><td>—</td><td><strong>0</strong></td><td>∞</td><td>∞</td><td>∞</td><td>∞</td><td>∞</td></tr>
+    <tr><td>1</td><td>A</td><td>0</td><td>4</td><td><strong>2</strong></td><td>∞</td><td>∞</td><td>∞</td></tr>
+    <tr><td>2</td><td>C</td><td>0</td><td><strong>3</strong></td><td>2</td><td>10</td><td>12</td><td>∞</td></tr>
+    <tr><td>3</td><td>B</td><td>0</td><td>3</td><td>2</td><td><strong>8</strong></td><td>12</td><td>∞</td></tr>
+    <tr><td>4</td><td>D</td><td>0</td><td>3</td><td>2</td><td>8</td><td><strong>10</strong></td><td>14</td></tr>
+    <tr><td>5</td><td>E</td><td>0</td><td>3</td><td>2</td><td>8</td><td>10</td><td><strong>13</strong></td></tr>
+  </table>
+  <p><strong>最短路径</strong>：A → C → B → D → E → F，长度 = 2+1+5+2+3 = <strong>13</strong></p>
+
+  <p><strong>(b)</strong> 度数：deg(A)=2, deg(B)=3, deg(C)=3, deg(D)=3, deg(E)=3, deg(F)=2</p>
+  <p>4 个奇度顶点（B,C,D,E）→ <strong>无 Euler circuit，无 Euler path</strong>。</p>
+  <p>Dirac: $\min\deg = 3 \ge 6/2 = 3$，满足 Dirac 条件 → <strong>存在 Hamilton circuit</strong>。路径：A→B→D→F→E→C→A。</p>
+
+  <hr style="margin:20px 0">
+
+  <h3>Q35 — Huffman 编码 (Ch11)</h3>
+  <p><strong>(a) 合并过程</strong></p>
+  <table>
+    <tr><th>Step</th><th>合并</th><th>新节点频率</th></tr>
+    <tr><td>1</td><td>C(0.05) + E(0.10)</td><td>CE = 0.15</td></tr>
+    <tr><td>2</td><td>A(0.15) + CE(0.15)</td><td>A-CE = 0.30</td></tr>
+    <tr><td>3</td><td>D(0.20) + F(0.25)</td><td>DF = 0.45</td></tr>
+    <tr><td>4</td><td>A-CE(0.30) + B(0.25)</td><td>A-CE-B = 0.55</td></tr>
+    <tr><td>5</td><td>A-CE-B(0.55) + DF(0.45)</td><td>ROOT = 1.00</td></tr>
+  </table>
+
+  <p><strong>编码表</strong></p>
+  <table>
+    <tr><th>符号</th><th>编码</th><th>长度</th></tr>
+    <tr><td>B</td><td>00</td><td>2</td></tr>
+    <tr><td>D</td><td>10</td><td>2</td></tr>
+    <tr><td>F</td><td>11</td><td>2</td></tr>
+    <tr><td>A</td><td>010</td><td>3</td></tr>
+    <tr><td>C</td><td>0110</td><td>4</td></tr>
+    <tr><td>E</td><td>0111</td><td>4</td></tr>
+  </table>
+
+  <p><strong>(b)</strong> 平均比特 = $2(0.25+0.20+0.25) + 3(0.15) + 4(0.05+0.10) = 1.40 + 0.45 + 0.60 = \mathbf{2.45}$</p>
+
+  <p><strong>(c)</strong> 6 个符号需要 $\lceil\log_2 6\rceil = 3$ bits。Huffman 节省约 <strong>18.3%</strong>。</p>
+</div>
+
+<div style="text-align:center;padding:32px;color:var(--muted);font-size:0.85rem">
+  Generated on June 22, 2026 · DMA 郑文庭班 · Good luck! 🍀
+</div>
+
+</div>
+</body>
+</html>
