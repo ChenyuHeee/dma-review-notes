@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-24: One-to-one & Onto</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.88rem}
+th,td{padding:8px 12px;text-align:center;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+tr:nth-child(even){background:#fafafa}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0}
+.vs>div{background:#f8fafc;border-radius:8px;padding:18px 22px}
+.vs>div h4{color:var(--accent);margin-bottom:10px;font-size:1.05rem}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-24 · Ch2 Sets</div>
+  <h1>One-to-one & Onto（单射 & 满射）</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<div class="card">
+  <h2>三个词，三个等价叫法</h2>
+  <table>
+    <tr><th>中文</th><th>英文 1</th><th>英文 2</th><th>核心含义</th></tr>
+    <tr><td>单射</td><td><strong>One-to-one</strong></td><td>Injective</td><td>不同输入 → 不同输出</td></tr>
+    <tr><td>满射</td><td><strong>Onto</strong></td><td>Surjective</td><td>陪域中每个值都被打到</td></tr>
+    <tr><td>双射</td><td><strong>One-to-one correspondence</strong></td><td>Bijective</td><td>单射 + 满射 = 一一对应</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>直观理解</h2>
+  <div class="vs">
+    <div>
+      <h4>One-to-one（单射）</h4>
+      <p>左边两个人不能打到右边同一个人</p>
+      <p style="font-size:.9rem;color:var(--muted);margin-top:6px">每个人有自己专属的目标</p>
+    </div>
+    <div>
+      <h4>Onto（满射）</h4>
+      <p>右边每个人都被至少一个人打到</p>
+      <p style="font-size:.9rem;color:var(--muted);margin-top:6px">不落下任何目标</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>判断方法</h2>
+  <table>
+    <tr><th></th><th>One-to-one?</th><th>Onto?</th></tr>
+    <tr><td>$f(x)=x^2$，$\mathbb{R}\to\mathbb{R}$</td><td>❌ $f(2)=f(-2)$</td><td>❌ 负数打不到</td></tr>
+    <tr><td>$f(x)=2x$，$\mathbb{R}\to\mathbb{R}$</td><td>✅</td><td>✅</td></tr>
+    <tr><td>$f(x)=e^x$，$\mathbb{R}\to\mathbb{R}^+$</td><td>✅</td><td>✅</td></tr>
+  </table>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-23.html">← QA-23 Isomorphism</a>
+    <a href="qa-22.html">📖 详见 QA-22</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>

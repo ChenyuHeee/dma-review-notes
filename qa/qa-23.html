@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-23: Graph Isomorphism</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+.def{background:#f8fafc;border-left:4px solid var(--accent);padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0}
+.def .label{font-weight:700;color:var(--accent);font-size:.85rem;margin-bottom:4px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.88rem}
+th,td{padding:8px 12px;text-align:center;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+tr:nth-child(even){background:#fafafa}
+.good{color:var(--green);font-weight:600}
+.bad{color:var(--red);font-weight:600}
+.box{background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:16px 20px;margin:12px 0}
+.box .title{font-weight:700;color:#92400e;margin-bottom:8px}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-23 · Ch10 Graphs</div>
+  <h1>Graph Isomorphism（图的同构）</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<div class="card">
+  <div class="def">
+    <div class="label">Definition</div>
+    <p>Two simple graphs $G_1=(V_1,E_1)$ and $G_2=(V_2,E_2)$ are <strong>isomorphic</strong> if there exists a <strong>bijection</strong> $f: V_1 \to V_2$ such that:</p>
+    <p style="text-align:center;font-size:1.05rem;margin:8px 0">$\{a,b\} \in E_1 \iff \{f(a), f(b)\} \in E_2$</p>
+  </div>
+  <p>简单说：两个图<strong>结构完全相同</strong>，只是顶点名字不同、画法不同。</p>
+</div>
+
+<div class="card">
+  <h2>怎么判断两个图同构？</h2>
+
+  <p><strong>先检查 Invariants（不变量）— 必须全部相同：</strong></p>
+  <table>
+    <tr><th>不变量</th><th>$G_1$</th><th>$G_2$</th><th>不同？</th></tr>
+    <tr><td>顶点数 $v$</td><td>5</td><td>5</td><td>✅</td></tr>
+    <tr><td>边数 $e$</td><td>8</td><td>8</td><td>✅</td></tr>
+    <tr><td>度序列（排序后）</td><td>3,3,3,3,4</td><td>3,3,3,3,4</td><td>✅</td></tr>
+    <tr><td>是否有 3-回路？</td><td>有</td><td>有</td><td>✅</td></tr>
+    <tr><td>是否二部图？</td><td>否</td><td>否</td><td>✅</td></tr>
+  </table>
+
+  <p style="margin-top:8px"><strong>不变量全部相同 → 可能同构</strong>（但不保证）。<br>
+  <strong>任何一个不变量不同 → 一定不同构</strong>。</p>
+
+  <div class="box" style="margin-top:12px">
+    <div class="title">考试套路</div>
+    <p>90% 的考试题是不变量不同 → 直接说不同构。剩下的 10% 是不变量全相同，需要手动构造双射 $f$。</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>典型反例：不变量全相同但不同构</h2>
+
+  <p>$G_1$：六边形 $C_6$（6 个顶点围成圈）</p>
+  <p>$G_2$：两个三角形 $C_3 \cup C_3$（两个独立的三角形）</p>
+
+  <table>
+    <tr><th>不变量</th><th>$G_1$ ($C_6$)</th><th>$G_2$ ($C_3 \cup C_3$)</th></tr>
+    <tr><td>$v$</td><td>6</td><td>6</td></tr>
+    <tr><td>$e$</td><td>6</td><td>6</td></tr>
+    <tr><td>度序列</td><td>都是 (2,2,2,2,2,2)</td><td>都是 (2,2,2,2,2,2)</td></tr>
+    <tr><td>连通？</td><td class="good">是（1 个分量）</td><td class="bad">否（2 个分量）</td></tr>
+  </table>
+  <p>连通分量数不同 → <strong>不同构</strong>！</p>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-22.html">← QA-22 Functions & Big-O</a>
+    <a href="../notes/Ch10-10.3-Representing-Graphs-and-Isomorphism.md">📖 笔记: Ch10-10.3</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>
