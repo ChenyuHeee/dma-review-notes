@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-06: Partial Order 再解释</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+.highlight{background:linear-gradient(transparent 60%,#fef08a 60%);padding:0 4px}
+.step-num{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;background:var(--accent);color:#fff;border-radius:50%;font-size:.8rem;margin-right:8px;font-weight:700}
+.box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px 20px;margin:12px 0}
+.box .title{font-weight:700;color:#16a34a;margin-bottom:8px}
+.box-r{background:#fef3c7;border:1px solid #fde68a}
+.box-r .title{color:#92400e}
+.box-b{background:#eff6ff;border:1px solid #bfdbfe}
+.box-b .title{color:#1e40af}
+.tree{font-family:monospace;white-space:pre;background:#f8fafc;padding:16px;border-radius:8px;line-height:1.4;font-size:.85rem;margin:12px 0;overflow-x:auto}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-06 · Ch9 Relations</div>
+  <h1>Partial Order — 用"公司层级"来理解</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<!-- ====== STEP 1 ====== -->
+<div class="card">
+  <h2><span class="step-num">1</span> 先不管数学定义，看一张公司组织图</h2>
+
+  <div class="tree">
+     CEO（老板）
+     /\
+    /  \
+   /    \
+CTO    CFO
+ |
+ |
+Engineer
+  </div>
+
+  <p>这个层级关系就是 <strong>Partial Order（偏序）</strong>。</p>
+
+  <div class="box">
+    <div class="title">为什么叫 Partial？</div>
+    <p>CTO 和 CFO <strong>没有上下级关系</strong>——你没法说"CTO 比 CFO 大还是小"。</p>
+    <p style="margin-top:4px">有些对可以比（CEO → CTO → Engineer），有些对不能比（CTO vs CFO）。</p>
+    <p style="margin-top:4px;font-weight:700">"部分可比、部分不可比" = Partial</p>
+  </div>
+</div>
+
+<!-- ====== STEP 2 ====== -->
+<div class="card">
+  <h2><span class="step-num">2</span> 把这个层级关系抽象成三个规则</h2>
+
+  <p>用 $x \preceq y$ 表示"$x$ 在 $y$ 下面（或等于 $y$）"：</p>
+
+  <div class="box box-b">
+    <div class="title">规则 ① Reflexive（自反）</div>
+    <p>每个人都是自己的下属（自己管自己）。</p>
+    <p>$a \preceq a$ 总是成立。很自然吧？</p>
+  </div>
+
+  <div class="box box-b" style="margin-top:12px">
+    <div class="title">规则 ② Antisymmetric（反对称）</div>
+    <p>如果你是我老板，<strong>我不能同时是你老板</strong>。</p>
+    <p>如果 $a \preceq b$ 且 $b \preceq a$，那只可能是 $a = b$（同一个人）。</p>
+    <p style="margin-top:4px;color:var(--muted)">在公司里：CEO 管 CTO，CTO <strong>不可能</strong>反过来管 CEO。这就是 Antisymmetric。</p>
+  </div>
+
+  <div class="box box-b" style="margin-top:12px">
+    <div class="title">规则 ③ Transitive（传递）</div>
+    <p>CEO 管 CTO，CTO 管 Engineer → CEO 管 Engineer。</p>
+    <p>如果 $a \preceq b$ 且 $b \preceq c$，则 $a \preceq c$。</p>
+  </div>
+
+  <div class="box" style="margin-top:16px">
+    <p><strong>这三个规则加在一起，就是一个 Partial Order。</strong></p>
+    <p>简单说：<span class="highlight">Partial Order = 不循环的、有传递性的层级关系</span>。</p>
+  </div>
+</div>
+
+<!-- ====== STEP 3 ====== -->
+<div class="card">
+  <h2><span class="step-num">3</span> 考试最常考的偏序：整除</h2>
+
+  <p>$A = \{1, 2, 3, 4, 6, 12\}$，定义 $a \preceq b$ 为 "$a$ 整除 $b$"（记作 $a \mid b$）。</p>
+
+  <div class="tree">
+      12
+     / \
+    6   4
+   / \  |
+  2   3 |
+   \ /  |
+    1   |
+     \  |
+      1
+  </div>
+
+  <p>1 → 2 → 6 → 12（1 整除 2，2 整除 6，6 整除 12）</p>
+  <p>1 → 3 → 6 → 12</p>
+  <p>1 → 2 → 4 → 12</p>
+
+  <div class="box box-r" style="margin-top:12px">
+    <div class="title">3 和 4 之间？</div>
+    <p>3 不能整除 4，4 也不能整除 3 → <strong>不可比较！</strong></p>
+    <p>这就是 Partial 的含义——3 和 4 在公司里就像两个平级部门主管，谁也不是谁的上级。</p>
+  </div>
+</div>
+
+<!-- ====== STEP 4 ====== -->
+<div class="card">
+  <h2><span class="step-num">4</span> 回到定义，现在能看懂了吗？</h2>
+
+  <p>A <strong>partial order</strong> on a set $A$ is a relation $R$ that is:</p>
+  <ul style="margin:8px 0 0 20px;line-height:2.2">
+    <li><strong>Reflexive</strong>: $(a,a) \in R$ for all $a \in A$（每个人管自己）</li>
+    <li><strong>Antisymmetric</strong>: if $(a,b) \in R$ and $(b,a) \in R$, then $a = b$（不能互相当老板）</li>
+    <li><strong>Transitive</strong>: if $(a,b) \in R$ and $(b,c) \in R$, then $(a,c) \in R$（老板的老板也是老板）</li>
+  </ul>
+
+  <p style="margin-top:16px"><strong>和等价关系的唯一区别</strong>：等价用 Symmetric（平等），偏序用 Antisymmetric（层级）。其他完全一样。</p>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-05.html">← QA-05</a>
+    <a href="../notes/Ch09-9.6-Partial-Orderings.md">📖 笔记: Ch09-9.6</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>

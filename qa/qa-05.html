@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-05: Partial Order 偏序是什么</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+.box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px 20px;margin:12px 0}
+.box .title{font-weight:700;color:#16a34a;margin-bottom:8px}
+.box-r{background:#fef3c7;border:1px solid #fde68a}
+.box-r .title{color:#92400e}
+.box-b{background:#eff6ff;border:1px solid #bfdbfe}
+.box-b .title{color:#1e40af}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.vs>div{background:#f8fafc;border-radius:8px;padding:16px 20px}
+.vs>div h4{color:var(--accent);margin-bottom:8px}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-05 · Ch9 Relations</div>
+  <h1>Partial Order（偏序）到底是什么？</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<div class="card">
+  <h2>先忘掉数学定义，想一个现实例子</h2>
+  <p>你手机里有几个 App。有些 App 之间可以比较"大小"（比如按安装时间），但有些 App <strong>无法比较</strong>——比如微信和支付宝，谁的版本号更大？没法比。</p>
+  <p style="margin-top:8px"><strong>Partial Order 就是"部分可比、部分不可比"的排序关系。</strong></p>
+</div>
+
+<div class="card">
+  <h2>正式定义</h2>
+  <p>集合 $A$ 上的关系 $R$ 是 <strong>Partial Order（偏序）</strong>，必须满足三个条件：</p>
+  <table>
+    <tr><th>条件</th><th>含义</th><th>例子: $\le$ 在整数上</th></tr>
+    <tr><td>① Reflexive</td><td>$aRa$</td><td>$3 \le 3$ ✓</td></tr>
+    <tr><td>② Antisymmetric</td><td>若 $aRb$ 且 $bRa$，则 $a=b$</td><td>$3 \le 5$ 且 $5 \le 3$ 不可能同时成立 ✓</td></tr>
+    <tr><td>③ Transitive</td><td>若 $aRb$ 且 $bRc$，则 $aRc$</td><td>$3 \le 5$ 且 $5 \le 7$ → $3 \le 7$ ✓</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>最关键的一点：Antisymmetric ≠ "不对称"</h2>
+  <div class="vs">
+    <div>
+      <h4>Symmetric（对称）</h4>
+      <p>$aRb \Rightarrow bRa$</p>
+      <p style="margin-top:4px;color:var(--muted)">你爱我 = 我爱你<br>等价关系用这个</p>
+    </div>
+    <div>
+      <h4>Antisymmetric（反对称）</h4>
+      <p>$aRb$ 且 $bRa \Rightarrow a = b$</p>
+      <p style="margin-top:4px;color:var(--muted)">双向箭头只能出现在自己和自己的自环上<br>偏序用这个</p>
+    </div>
+  </div>
+  <p style="margin-top:8px"><strong>记忆</strong>：偏序 = "有方向的层级关系"，不允许两个不同的元素互相指向对方。所以它叫 <strong>Anti</strong>-symmetric。</p>
+</div>
+
+<div class="card">
+  <h2>经典例子对比</h2>
+
+  <div class="box">
+    <div class="title">例 1：$(\mathbb{Z}, \le)$ — 全序（链）</div>
+    <p>任意两个数都可以比较：$3 \le 5$ 或 $5 \le 3$ 必有一个成立。</p>
+    <p style="margin-top:4px;color:var(--muted)">这种情况叫 <strong>Total Order（全序）</strong>，是偏序的一种特殊情况。</p>
+  </div>
+
+  <div class="box box-b" style="margin-top:12px">
+    <div class="title">例 2：$(\mathbb{Z}^+, \mid)$ — 整除偏序（考试最爱）</div>
+    <p>$a R b \iff a \mid b$（$a$ 整除 $b$）</p>
+    <p style="margin-top:6px">$A = \{1, 2, 3, 4, 6, 12\}$：</p>
+    <ul style="margin:4px 0 0 20px">
+      <li>$2 \mid 4$ ✓（2 在 4 "下面"）</li>
+      <li>$2 \mid 6$ ✓</li>
+      <li>$3$ 和 $4$ 之间？$3 \nmid 4$，$4 \nmid 3$ → <strong>不可比较！</strong></li>
+    </ul>
+    <p style="margin-top:4px;color:var(--muted)">这种"有些能比有些不能比"的关系就是偏序。</p>
+    <p style="margin-top:4px;color:var(--muted)">这就解释了为什么叫 <strong>Partial</strong>（部分的，不完整的）——不是所有元素都能比较。</p>
+  </div>
+
+  <div class="box box-r" style="margin-top:12px">
+    <div class="title">例 3：$(\mathcal{P}(\{a,b\}), \subseteq)$ — 子集偏序</div>
+    <p>$\emptyset \subseteq \{a\} \subseteq \{a,b\}$，但 $\{a\}$ 和 $\{b\}$ 互不包含 → 不可比较。</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>等价关系 vs 偏序 — 一张表分清</h2>
+  <table>
+    <tr><th></th><th>等价关系</th><th>偏序</th></tr>
+    <tr><td>Reflexive</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Symmetric</td><td>✅</td><td>❌ (用 Antisymmetric)</td></tr>
+    <tr><td>Antisymmetric</td><td>❌ (用 Symmetric)</td><td>✅</td></tr>
+    <tr><td>Transitive</td><td>✅</td><td>✅</td></tr>
+    <tr><td>直观</td><td>横向分类（平等关系）</td><td>纵向层级（上下关系）</td></tr>
+    <tr><td>代表</td><td>同余、等长</td><td>$\le$、整除、子集</td></tr>
+  </table>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-04.html">← QA-04 Partition</a>
+    <a href="../notes/Ch09-9.6-Partial-Orderings.md">📖 笔记: Ch09-9.6</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-03: 什么是 Equivalence Relation</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+.card h3{font-size:1rem;margin:16px 0 8px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+tr:nth-child(even){background:#fafafa}
+.box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px 20px;margin:12px 0}
+.box .title{font-weight:700;color:#16a34a;margin-bottom:8px}
+.box-r{background:#fef3c7;border:1px solid #fde68a}
+.box-r .title{color:#92400e}
+.box-b{background:#eff6ff;border:1px solid #bfdbfe}
+.box-b .title{color:#1e40af}
+.rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.rel-item{background:#f8fafc;border-radius:8px;padding:14px 18px;border-left:3px solid var(--accent)}
+.rel-item .prop{font-weight:700;color:var(--accent)}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-03 · Ch9 Relations</div>
+  <h1>什么是 Equivalence Relation（等价关系）？</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27 · 离散数学 · 考前复习</div>
+</header>
+
+<div class="card">
+  <h2>一句话</h2>
+  <p><strong>等价关系</strong> = 同时满足 <strong>Reflexive + Symmetric + Transitive</strong> 三种性质的关系。</p>
+  <p style="margin-top:8px">你可以把它理解为一种<strong>分类规则</strong>——把集合中的元素分成若干组，同组的元素彼此"等价"。</p>
+</div>
+
+<div class="card">
+  <h2>三个条件</h2>
+  <div class="rel-grid">
+    <div class="rel-item"><span class="prop">Reflexive（自反）</span><br>每个元素和自己等价<br>$(a,a) \in R$ 对所有 $a$</div>
+    <div class="rel-item"><span class="prop">Symmetric（对称）</span><br>等价是双向的<br>若 $aRb$ 则 $bRa$</div>
+  </div>
+  <div class="rel-item" style="margin-top:12px;grid-column:1/-1"><span class="prop">Transitive（传递）</span><br>等价可以传递<br>若 $aRb$ 且 $bRc$，则 $aRc$</div>
+</div>
+
+<div class="card">
+  <h2>经典例子</h2>
+
+  <div class="box">
+    <div class="title">例 1：模 $m$ 同余</div>
+    <p>$a \equiv b \pmod{m}$ 是等价关系：</p>
+    <ul style="margin:8px 0 0 20px">
+      <li>自反：$a \equiv a \pmod{m}$ ✓</li>
+      <li>对称：若 $a \equiv b$，则 $b \equiv a$ ✓</li>
+      <li>传递：若 $a \equiv b$ 且 $b \equiv c$，则 $a \equiv c$ ✓</li>
+    </ul>
+    <p style="margin-top:8px">等价类：$[0]_3 = \{\dots,-3,0,3,6,\dots\}$（除以 3 余 0 的所有数）</p>
+  </div>
+
+  <div class="box" style="margin-top:12px">
+    <div class="title">例 2：等长字符串</div>
+    <p>字符串 $s$ 和 $t$ 等价 $\iff$ $|s| = |t|$（长度相同）</p>
+    <p style="margin-top:4px">等价类：所有长度为 0 的串、所有长度为 1 的串、……</p>
+  </div>
+
+  <div class="box box-r" style="margin-top:12px">
+    <div class="title">反例：整除关系 $a \mid b$</div>
+    <p>$3 \mid 6$ 但 $6 \nmid 3$ → <strong>不对称</strong>，不是等价关系。</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>核心定理：等价类 = 划分</h2>
+  <p>一个等价关系会把集合<strong>切成若干块</strong>（等价类），这些块：</p>
+  <ul style="margin:8px 0 0 20px">
+    <li>两两不相交</li>
+    <li>并起来等于全集</li>
+  </ul>
+  <p style="margin-top:8px">这就叫 <strong>Partition（划分）</strong>。反之，给定一个划分，也可以定义一个等价关系。</p>
+  <div class="box box-b" style="margin-top:12px">
+    <div class="title">等价关系 ⟷ 划分（一一对应）</div>
+    <p>这是 Ch9.5 最重要的定理，考试必考。</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>与其他关系的对比</h2>
+  <table>
+    <tr><th>关系类型</th><th>Reflexive</th><th>Symmetric</th><th>Antisymmetric</th><th>Transitive</th></tr>
+    <tr><td>等价关系</td><td>✅</td><td>✅</td><td>—</td><td>✅</td></tr>
+    <tr><td>偏序关系</td><td>✅</td><td>—</td><td>✅</td><td>✅</td></tr>
+    <tr><td>一般关系</td><td>?</td><td>?</td><td>?</td><td>?</td></tr>
+  </table>
+  <p style="margin-top:8px;color:var(--muted)">关键区别：等价关系要 <strong>Symmetric（对称）</strong>，偏序要 <strong>Antisymmetric（反对称）</strong>。两者互斥（除非是恒等关系）。</p>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-02.html">← QA-02</a>
+    <a href="../notes/Ch09-9.5-Equivalence-Relations.md">📖 笔记: Ch09-9.5</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>

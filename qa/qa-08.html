@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-08: Comparability & Lexicographic Order</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+.def{background:#f8fafc;border-left:4px solid var(--accent);padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0}
+.def .label{font-weight:700;color:var(--accent);font-size:.85rem;text-transform:uppercase;margin-bottom:4px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-08 · Ch9 Relations</div>
+  <h1>Comparability & Lexicographic Order</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<div class="card">
+  <h2>Comparability（可比性）</h2>
+
+  <div class="def">
+    <div class="label">Definition</div>
+    <p>在偏序 $(A, \preceq)$ 中，两个元素 $a, b \in A$ 是 <strong>comparable</strong> 如果：</p>
+    <p style="text-align:center;font-size:1.1rem;margin:8px 0">$a \preceq b$ 或 $b \preceq a$</p>
+    <p>否则称为 <strong>incomparable</strong>（不可比）。</p>
+  </div>
+
+  <p style="margin-top:12px"><strong>例子</strong>：$A = \{1,2,3,4,6,12\}$，偏序为整除 $a \mid b$。</p>
+  <table>
+    <tr><th>元素对</th><th>关系</th><th>结果</th></tr>
+    <tr><td>2, 4</td><td>$2 \mid 4$</td><td>comparable ✅</td></tr>
+    <tr><td>3, 6</td><td>$3 \mid 6$</td><td>comparable ✅</td></tr>
+    <tr><td>3, 4</td><td>$3 \nmid 4$ 且 $4 \nmid 3$</td><td><strong>incomparable</strong> ❌</td></tr>
+    <tr><td>2, 12</td><td>$2 \mid 12$</td><td>comparable ✅</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Total Order（全序）vs Partial Order（偏序）</h2>
+
+  <div class="def">
+    <p>如果偏序中<strong>任意两个元素都可比</strong>，就叫 <strong>total order</strong>（全序，也叫 linear order / 线序）。</p>
+    <p>如果存在不可比的元素对，就只是 <strong>partial order</strong>（偏序）。</p>
+  </div>
+
+  <table>
+    <tr><th></th><th>例子</th><th>任意两个可比？</th><th>类型</th></tr>
+    <tr><td>$(\mathbb{Z}, \le)$</td><td>$3 \le 5$ 或 $5 \le 3$ 总有一个成立</td><td>是</td><td>Total Order</td></tr>
+    <tr><td>$(\{1,2,3,4,6,12\}, \mid)$</td><td>$3$ 和 $4$ 无法比较</td><td>否</td><td>Partial Order</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Lexicographic Order（字典序）</h2>
+
+  <div class="def">
+    <div class="label">Definition</div>
+    <p>在两个偏序 $(A_1, \preceq_1)$ 和 $(A_2, \preceq_2)$ 的<strong>笛卡尔积</strong> $A_1 \times A_2$ 上定义字典序 $\preceq$：</p>
+    <p style="text-align:center;font-size:1.05rem;margin:8px 0">$(a_1, a_2) \prec (b_1, b_2) \iff (a_1 \prec_1 b_1) \;\text{或}\; (a_1 = b_1 \;\text{且}\; a_2 \prec_2 b_2)$</p>
+    <p>简单说：<strong>先比第一个分量，第一个相同再比第二个</strong>。</p>
+  </div>
+
+  <p style="margin-top:12px"><strong>例子</strong>：字符串的字典序。</p>
+  <p>$A = \{a,b,c,\dots,z\}$，偏序为字母表顺序。扩展到 $A \times A \times \dots$ 上：</p>
+  <p style="margin:8px 0">"bat" $\prec$ "cat"（第一个字母 b < c，直接决定）</p>
+  <p>"car" $\prec$ "cat"（前两个字母 ca = ca，第三个 r < t 决定）</p>
+
+  <p style="margin-top:12px"><strong>考试形式</strong>：给你两个元组，判断谁在字典序中更小。</p>
+  <p>$(2, 5, 3) \prec (2, 5, 7)$：$2=2$, $5=5$, $3<7$ → $(2,5,3) \prec (2,5,7)$。</p>
+  <p>$(2, 8, 1) \prec (3, 1, 9)$：$2<3$ → 直接结束，$(2,8,1) \prec (3,1,9)$。</p>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-07.html">← QA-07 Partial Order</a>
+    <a href="../notes/Ch09-9.6-Partial-Orderings.md">📖 笔记: Ch09-9.6</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-02: Closure 记号需要背吗</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+header .meta{font-size:.82rem;opacity:.7}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--border,#dee2e6)}
+th{background:#f1f5f9;font-weight:600}
+tr:nth-child(even){background:#fafafa}
+.demo-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px 20px;margin:12px 0}
+.demo-box .title{font-weight:700;color:var(--green);margin-bottom:8px}
+.warn-box{background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:16px 20px;margin:12px 0}
+.warn-box .title{font-weight:700;color:#92400e;margin-bottom:8px}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-02 · Ch9 Relations</div>
+  <h1>Closure 的记号需要背吗？</h1>
+  <div class="meta">2026-06-27 · 离散数学 · 考前复习</div>
+</header>
+
+<div class="card">
+  <h2>需要背的只有 3 个</h2>
+  <table>
+    <tr><th>记号</th><th>含义</th><th>记忆方法</th></tr>
+    <tr><td>$r(R)$</td><td>自反闭包</td><td><strong>r</strong>eflexive</td></tr>
+    <tr><td>$s(R)$</td><td>对称闭包</td><td><strong>s</strong>ymmetric</td></tr>
+    <tr><td>$t(R)$</td><td>传递闭包</td><td><strong>t</strong>ransitive</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>公式理解即可，不用死记</h2>
+  <div class="demo-box">
+    <div class="title">$r(R) = R \cup \Delta$</div>
+    <p>$\Delta$ = 对角线 = 所有 $(a,a)$ 的集合。自反闭包 = 原关系 + 对角线。</p>
+  </div>
+  <div class="demo-box">
+    <div class="title">$s(R) = R \cup R^{-1}$</div>
+    <p>$R^{-1}$ = 把 $R$ 中每条边反过来。对称闭包 = 原关系 + 所有反向边。</p>
+  </div>
+  <div class="demo-box">
+    <div class="title">$t(R) = R^*$</div>
+    <p>$R^*$ = 连通关系（connectivity relation）。本质就是 Warshall 算法算出来的结果。</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>考试怎么考</h2>
+  <p>记号本身<strong>不会单独考</strong>。实际考题形式：</p>
+  <ul style="margin:12px 0 0 20px;line-height:2">
+    <li>给你 $R$，让你手算 $t(R)$（Warshall 矩阵手算）</li>
+    <li>问你"最小的包含 $R$ 的等价关系是什么"→ 依次做 $r(R) \to s(R) \to t(R)$</li>
+    <li>问你"最小的包含 $R$ 的偏序关系是什么"→ 依次做 $r(R) \to t(R)$（偏序不需要对称）</li>
+  </ul>
+  <p style="margin-top:8px;color:var(--muted)">会用就行，不用背。</p>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-01.html">← QA-01 Closure 是什么</a>
+    <a href="../notes/Ch09-9.4-Closures-of-Relations.md">📖 笔记: Ch09-9.4</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>

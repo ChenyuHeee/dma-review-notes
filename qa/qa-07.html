@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-07: Partial Order 定义详解</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+.def{background:#f8fafc;border-left:4px solid var(--accent);padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0}
+.def .label{font-weight:700;color:var(--accent);font-size:.85rem;text-transform:uppercase;margin-bottom:6px}
+.bad{color:var(--red);font-weight:600}
+.good{color:var(--green);font-weight:600}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-07 · Ch9 Relations</div>
+  <h1>Partial Order（偏序）定义</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<div class="card">
+  <div class="def">
+    <div class="label">Definition</div>
+    <p>A relation $R$ on a set $A$ is a <strong>partial order</strong> if it is:</p>
+    <p style="margin-top:8px"><strong>1. Reflexive:</strong> $(a,a) \in R$ for all $a \in A$</p>
+    <p><strong>2. Antisymmetric:</strong> if $(a,b) \in R$ and $(b,a) \in R$, then $a = b$</p>
+    <p><strong>3. Transitive:</strong> if $(a,b) \in R$ and $(b,c) \in R$, then $(a,c) \in R$</p>
+  </div>
+  <p>集合 $A$ 连同其上的偏序 $R$ 称为 <strong>poset</strong>（partially ordered set），记作 $(A, R)$。</p>
+</div>
+
+<div class="card">
+  <h2>三个条件逐一解释</h2>
+
+  <p><strong>Reflexive（自反）</strong>——每个元素必须和自己有关系。这是形式要求，几乎总是满足的。</p>
+
+  <p style="margin-top:12px"><strong>Antisymmetric（反对称）</strong>——这是偏序的核心特征。看逻辑结构：</p>
+  <div class="def">
+    <p style="font-family:monospace">IF (a,b) ∈ R AND (b,a) ∈ R THEN a = b</p>
+  </div>
+  <p>"同一个箭头不能双向存在，除非是自环"。等价关系要求 Symmetric（有来有回），偏序要求 Antisymmetric（有来无回）。<strong>只有这个条件不同。</strong></p>
+
+  <p style="margin-top:12px"><strong>Transitive（传递）</strong>——如果 a 指向 b 且 b 指向 c，则 a 必须直接指向 c。和等价关系的传递完全一样。</p>
+</div>
+
+<div class="card">
+  <h2>两个标准例子</h2>
+
+  <p><strong>例 1</strong>：$A = \mathbb{Z}$，$R$ 为 $\le$（小于等于）</p>
+  <p>自反：$a \le a$ ✓ | 反对称：$a \le b$ 且 $b \le a \Rightarrow a = b$ ✓ | 传递：$a \le b$ 且 $b \le c \Rightarrow a \le c$ ✓</p>
+
+  <p style="margin-top:12px"><strong>例 2</strong>：$A = \{1,2,3,4,6,12\}$，$R$ 为整除 $a \mid b$</p>
+  <p>自反：$a \mid a$ ✓ | 反对称：$a \mid b$ 且 $b \mid a \Rightarrow a=b$ ✓ | 传递：$a \mid b$ 且 $b \mid c \Rightarrow a \mid c$ ✓</p>
+  <p style="margin-top:4px">这个例子中 $3$ 和 $4$ 之间没有任何整除关系。这就是 <strong>Partial</strong> 的含义——不是任意两个元素都可比。</p>
+</div>
+
+<div class="card">
+  <h2>等价关系 vs 偏序（仅这一点不同）</h2>
+  <table>
+    <tr><th></th><th>Equivalence Relation</th><th>Partial Order</th></tr>
+    <tr><td>Reflexive</td><td class="good">✅</td><td class="good">✅</td></tr>
+    <tr><td style="background:#fef3c7">关键区别</td><td class="good" style="background:#fef3c7">Symmetric</td><td class="good" style="background:#fef3c7">Antisymmetric</td></tr>
+    <tr><td>Transitive</td><td class="good">✅</td><td class="good">✅</td></tr>
+  </table>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-06.html">← QA-06</a>
+    <a href="../notes/Ch09-9.6-Partial-Orderings.md">📖 笔记: Ch09-9.6</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>
