@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-11: 什么是 Lattice</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+.def{background:#f8fafc;border-left:4px solid var(--accent);padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0}
+.def .label{font-weight:700;color:var(--accent);font-size:.85rem;margin-bottom:4px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.89rem}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+tr:nth-child(even){background:#fafafa}
+.good{color:var(--green);font-weight:600}
+.bad{color:var(--red);font-weight:600}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-11 · Ch9 Relations</div>
+  <h1>什么是 Lattice（格）？</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<div class="card">
+  <div class="def">
+    <div class="label">Definition</div>
+    <p>A poset $(A, \preceq)$ is a <strong>lattice</strong> if every pair of elements has <strong>both</strong> a least upper bound (LUB) and a greatest lower bound (GLB).</p>
+  </div>
+  <p style="margin-top:12px">翻译：任取两个元素，它们的<strong>最小上界</strong>和<strong>最大下界</strong>都存在，就是 lattice。</p>
+</div>
+
+<div class="card">
+  <h2>理解 lattice 只需要看一个例子</h2>
+
+  <p>$A = \{1, 2, 3, 4, 6, 12\}$，偏序为整除 $a \mid b$。</p>
+
+  <p style="margin-top:12px">任取两个元素，算 LUB 和 GLB：</p>
+
+  <table>
+    <tr><th>$a, b$</th><th>LUB = $\operatorname{lcm}(a,b)$</th><th>在 $A$ 中？</th><th>GLB = $\gcd(a,b)$</th><th>在 $A$ 中？</th></tr>
+    <tr><td>$2, 6$</td><td>$\operatorname{lcm}=6$</td><td class="good">✅</td><td>$\gcd=2$</td><td class="good">✅</td></tr>
+    <tr><td>$3, 4$</td><td>$\operatorname{lcm}=12$</td><td class="good">✅</td><td>$\gcd=1$</td><td class="good">✅</td></tr>
+    <tr><td>$4, 6$</td><td>$\operatorname{lcm}=12$</td><td class="good">✅</td><td>$\gcd=2$</td><td class="good">✅</td></tr>
+    <tr><td>$2, 3$</td><td>$\operatorname{lcm}=6$</td><td class="good">✅</td><td>$\gcd=1$</td><td class="good">✅</td></tr>
+    <tr><td>$1, 12$</td><td>$\operatorname{lcm}=12$</td><td class="good">✅</td><td>$\gcd=1$</td><td class="good">✅</td></tr>
+  </table>
+
+  <p style="margin-top:8px"><strong>所有对的 LUB 和 GLB 都在 $A$ 中 → $(A, \mid)$ 是 lattice。</strong></p>
+</div>
+
+<div class="card">
+  <h2>反例：什么不是 lattice</h2>
+
+  <p>$B = \{2, 3, 4, 6\}$，整除偏序。</p>
+
+  <table>
+    <tr><th>$a, b$</th><th>LUB = $\operatorname{lcm}(a,b)$</th><th>在 $B$ 中？</th></tr>
+    <tr><td>$3, 4$</td><td>$\operatorname{lcm}=12$</td><td class="bad">❌ $12 \notin B$</td></tr>
+  </table>
+
+  <p style="margin-top:8px">3 和 4 的最小上界 12 不在 $B$ 中 → <strong>不是 lattice</strong>。</p>
+  <p style="margin-top:4px;color:var(--muted)">只要有一个元素对的 LUB 或 GLB 不在集合中，就不是 lattice。</p>
+</div>
+
+<div class="card">
+  <h2>判断流程</h2>
+  <p style="line-height:2.5">1. 在给定偏序下，LUB 和 GLB 的计算公式是什么？（整除偏序→lcm/gcd，子集偏序→并/交）</p>
+  <p style="line-height:2.5">2. 任取一对元素，算出 LUB 和 GLB。</p>
+  <p style="line-height:2.5">3. 检查是否都在集合中。全都满足 → lattice；有一个不在 → 不是。</p>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-10.html">← QA-10 极值元素</a>
+    <a href="../notes/Ch09-9.6-Partial-Orderings.md">📖 笔记: Ch09-9.6</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>

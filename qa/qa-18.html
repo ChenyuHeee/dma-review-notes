@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-18: Prim & Kruskal</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+.def{background:#f8fafc;border-left:4px solid var(--accent);padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0}
+.step{background:#eff6ff;border-radius:8px;padding:12px 18px;margin:6px 0;line-height:1.6}
+.step .num{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;background:var(--accent);color:#fff;border-radius:50%;font-size:.75rem;font-weight:700;margin-right:8px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.89rem}
+th,td{padding:8px 12px;text-align:center;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+tr:nth-child(even){background:#fafafa}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0}
+.vs>div{background:#f8fafc;border-radius:8px;padding:16px 20px}
+.vs>div h4{color:var(--accent);margin-bottom:8px}
+.box{background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:16px 20px;margin:12px 0}
+.box .title{font-weight:700;color:#92400e;margin-bottom:8px}
+.good{color:var(--green);font-weight:600}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-18 · Ch11 Trees</div>
+  <h1>Prim & Kruskal（最小生成树算法）</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<div class="card">
+  <h2>问题：求最小生成树 (MST)</h2>
+  <p>给定一个加权连通图，找一棵<strong>包含所有顶点的树</strong>，使得边权和最小。</p>
+  <p>两个经典算法：<strong>Prim</strong>（加点）和 <strong>Kruskal</strong>（加边）。</p>
+</div>
+
+<div class="card">
+  <h2>Prim 算法 — 选点扩张</h2>
+
+  <div class="def">
+    <p>从任意顶点出发。每次选一条<strong>连接树内和树外</strong>、<strong>权重最小</strong>的边，把树外的那个顶点加进来。重复直到所有顶点都在树里。</p>
+  </div>
+
+  <div class="step"><span class="num">1</span> 任选起点（通常选第一个顶点）</div>
+  <div class="step"><span class="num">2</span> 在连接已选顶点和未选顶点的所有边中，选权重最小的一条</div>
+  <div class="step"><span class="num">3</span> 把这条边和对应的新顶点加入 MST</div>
+  <div class="step"><span class="num">4</span> 重复 2-3，直到所有顶点都在 MST 中（共 $n-1$ 条边）</div>
+</div>
+
+<div class="card">
+  <h2>Kruskal 算法 — 选边合并</h2>
+
+  <div class="def">
+    <p>把所有边按权重从小到大排序。依次取每条边：如果加入后<strong>不形成回路</strong>，就加入 MST。直到凑齐 $n-1$ 条边。</p>
+  </div>
+
+  <div class="step"><span class="num">1</span> 所有边按权重从小到大排序</div>
+  <div class="step"><span class="num">2</span> 从小到大依次取边</div>
+  <div class="step"><span class="num">3</span> 如果加入这条边不形成回路（两端不在同一棵树中），就加入</div>
+  <div class="step"><span class="num">4</span> 重复直到凑齐 $n-1$ 条边</div>
+</div>
+
+<div class="card">
+  <h2>Prim vs Kruskal 对比</h2>
+  <div class="vs">
+    <div>
+      <h4>Prim（加点）</h4>
+      <p>从点出发，每次连接最近的外部点</p>
+      <p style="margin-top:4px">树始终保持连通</p>
+      <p>适合稠密图</p>
+    </div>
+    <div>
+      <h4>Kruskal（加边）</h4>
+      <p>从边出发，每次加最短的不成环边</p>
+      <p style="margin-top:4px">中间可能是森林</p>
+      <p>适合稀疏图</p>
+    </div>
+  </div>
+  <p style="margin-top:8px"><strong>相同点</strong>：结果相同（MST 唯一时），都是贪心算法。</p>
+</div>
+
+<div class="box">
+  <div class="title">考试怎么考</div>
+  <p>给一张加权图（5-6 个顶点），要求手算 Prim 或 Kruskal，写出每一步加入的边和累计权重。最后画出 MST。</p>
+  <p style="margin-top:8px">两个算法最终得到的是同一棵树（如果权值都不同），但中间步骤不同。</p>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-17.html">← QA-17 Tree Traversal</a>
+    <a href="../notes/Ch11-11.5-Minimum-Spanning-Trees.md">📖 笔记: Ch11-11.5</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>

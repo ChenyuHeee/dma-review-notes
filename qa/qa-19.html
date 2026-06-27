@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-19: Kruskal 详解</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.89rem}
+th,td{padding:8px 12px;text-align:center;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+tr:nth-child(even){background:#fafafa}
+.good{color:var(--green);font-weight:600}
+.bad{color:var(--red);font-weight:600}
+.mid{background:#dbeafe}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-19 · Ch11 Trees</div>
+  <h1>Kruskal 算法 — 手把手走一遍</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<div class="card">
+  <h2>示例图</h2>
+  <p>4 个顶点 A, B, C, D，边权重如下：</p>
+  <table>
+    <tr><th>边</th><td>A-B</td><td>A-C</td><td>A-D</td><td>B-C</td><td>B-D</td><td>C-D</td></tr>
+    <tr><th>权重</th><td>4</td><td>3</td><td>5</td><td>1</td><td>2</td><td>6</td></tr>
+  </table>
+  <p style="margin-top:8px">4 个顶点 → MST 需要 <strong>3 条边</strong>。</p>
+</div>
+
+<div class="card">
+  <h2>Step 1：所有边按权重从小到大排序</h2>
+  <table>
+    <tr><td>B-C</td><td>B-D</td><td>A-C</td><td>A-B</td><td>A-D</td><td>C-D</td></tr>
+    <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Step 2：从小到大依次取边，判断是否形成回路</h2>
+
+  <table>
+    <tr><th>顺序</th><th>边</th><th>权重</th><th>判断</th><th>MST 中的边</th><th>当前森林</th></tr>
+    <tr class="good">
+      <td>1</td><td>B-C</td><td>1</td><td class="good">✅ 加入</td><td>{B-C}</td><td>{B,C}, {A}, {D}</td>
+    </tr>
+    <tr class="good">
+      <td>2</td><td>B-D</td><td>2</td><td class="good">✅ 加入</td><td>{B-C, B-D}</td><td>{B,C,D}, {A}</td>
+    </tr>
+    <tr class="good">
+      <td>3</td><td>A-C</td><td>3</td><td class="good">✅ 加入</td><td>{B-C, B-D, A-C}</td><td>{A,B,C,D}</td>
+    </tr>
+  </table>
+
+  <p style="margin-top:8px">3 条边已够，算法结束。MST 权重 = 1 + 2 + 3 = <strong>6</strong>。</p>
+
+  <p style="margin-top:12px">注意第 4 条边 A-B(4) 不需要判断了，因为我们已经凑齐了 $n-1=3$ 条边。</p>
+</div>
+
+<div class="card">
+  <h2>核心：怎么判断"形成回路"？</h2>
+
+  <p>看这条边的两个端点是否<strong>已经在同一个连通分量中</strong>：</p>
+
+  <table>
+    <tr><th>边</th><th>两端</th><th>所在的森林</th><th>在同一棵树？</th><th>结论</th></tr>
+    <tr><td>B-C</td><td>B, C</td><td>{B},{C}</td><td class="bad">否</td><td class="good">加入</td></tr>
+    <tr><td>B-D</td><td>B, D</td><td>{B,C},{D}</td><td class="bad">否</td><td class="good">加入</td></tr>
+    <tr><td>A-C</td><td>A, C</td><td>{A},{B,C,D}</td><td class="bad">否</td><td class="good">加入</td></tr>
+  </table>
+
+  <p style="margin-top:12px"><strong>如果接下来继续</strong>：边 A-B(4)，A 在 {A,...}，B 在 {B,C,D,...} → 不在同一棵树 → 可以加入。</p>
+  <p>边 C-D(6)，C 和 D 都在 {B,C,D} 中 → <strong>同一棵树，加了就成环，跳过！</strong></p>
+</div>
+
+<div class="card">
+  <h2>对照 Prim 做同题</h2>
+  <p>同图，Prim（从 A 出发）：</p>
+  <table>
+    <tr><th>Step</th><th>选哪条边</th><th>权重</th><th>MST 顶点</th></tr>
+    <tr><td>1</td><td>A-C（连接 A 到外部的最小边）</td><td>3</td><td>{A, C}</td></tr>
+    <tr><td>2</td><td>C-B（连接树到外部的边中 C-B=1 最小）</td><td>1</td><td>{A, C, B}</td></tr>
+    <tr><td>3</td><td>B-D（连接树到外部的边中 B-D=2 最小）</td><td>2</td><td>{A, C, B, D}</td></tr>
+  </table>
+  <p style="margin-top:4px">Prim 结果：A-C(3) + C-B(1) + B-D(2) = <strong>6</strong>。和 Kruskal 结果一致。</p>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-18.html">← QA-18 Prim & Kruskal</a>
+    <a href="../notes/Ch11-11.5-Minimum-Spanning-Trees.md">📖 笔记: Ch11-11.5</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>

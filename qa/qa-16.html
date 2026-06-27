@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-16: Connected Components</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+.def{background:#f8fafc;border-left:4px solid var(--accent);padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0}
+.graph{font-family:monospace;white-space:pre;background:#f8fafc;padding:16px;border-radius:8px;line-height:1.3;font-size:.82rem;margin:12px 0;border:1px solid #e2e8f0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.89rem}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+tr:nth-child(even){background:#fafafa}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-16 · Ch10 Graphs</div>
+  <h1>Connected Components（连通分量）</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<div class="card">
+  <div class="def">
+    <p>A <strong>connected component</strong> of a graph is a maximal connected subgraph.</p>
+    <p>连通分量 = 图中"连在一起的最大块"。把图想象成若干孤岛，每个岛就是一个连通分量。</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>例子</h2>
+  <div class="graph">
+    A --- B --- C       D --- E        F
+                                  (孤立点)
+  </div>
+
+  <p>这个图有 <strong>3 个连通分量</strong>：</p>
+  <table>
+    <tr><th>分量</th><th>顶点</th><th>边</th></tr>
+    <tr><td>1</td><td>$\{A, B, C\}$</td><td>A-B, B-C</td></tr>
+    <tr><td>2</td><td>$\{D, E\}$</td><td>D-E</td></tr>
+    <tr><td>3</td><td>$\{F\}$</td><td>无</td></tr>
+  </table>
+  <p>图是 <strong>connected</strong> $\iff$ 连通分量数 = 1。</p>
+</div>
+
+<div class="card">
+  <h2>相关概念</h2>
+
+  <p><strong>Cut vertex（割点）</strong>：删除它后连通分量数增加的点。</p>
+  <p style="margin-top:6px"><strong>Cut edge / Bridge（割边/桥）</strong>：删除它后连通分量数增加的边。</p>
+
+  <div class="graph" style="margin-top:12px">
+    A --- B --- C --- D
+          |           |
+          E           F
+  </div>
+  <p>B 是割点（删了 B，A 和 E 与右侧断开）。边 B-C 是桥（删了它图就一分为二）。</p>
+</div>
+
+<div class="card">
+  <h2>有向图中的连通性</h2>
+
+  <p><strong>Weakly connected（弱连通）</strong>：把有向边当成无向边后是连通的。</p>
+  <p style="margin-top:6px"><strong>Strongly connected（强连通）</strong>：任意两点 $u,v$ 之间都存在<strong>有向路径</strong> $u \to v$ 和 $v \to u$。</p>
+  <p style="margin-top:6px"><strong>SCC（强连通分量）</strong>：极大强连通子图。</p>
+
+  <p style="margin-top:8px;color:var(--muted)">强连通必然弱连通，反之不成立。</p>
+</div>
+
+<div class="card">
+  <h2>考试怎么考</h2>
+  <p>给一个图，问：有几个连通分量？哪些点是割点？哪些边是桥？弱连通还是强连通？找 SCC。</p>
+  <p style="margin-top:8px">全是手算/目测题，不考算法实现。</p>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-15.html">← QA-15 Euler vs Hamilton</a>
+    <a href="../notes/Ch10-10.4-Connectivity.md">📖 笔记: Ch10-10.4</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>

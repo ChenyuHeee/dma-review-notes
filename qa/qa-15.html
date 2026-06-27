@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-15: Euler vs Hamilton</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+.def{background:#f8fafc;border-left:4px solid var(--accent);padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0}
+.def .label{font-weight:700;color:var(--accent);font-size:.85rem;margin-bottom:4px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.89rem}
+th,td{padding:8px 12px;text-align:center;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+tr:nth-child(even){background:#fafafa}
+.left{text-align:left}
+.good{color:var(--green);font-weight:600}
+.bad{color:var(--red);font-weight:600}
+.box{background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:16px 20px;margin:12px 0}
+.box .title{font-weight:700;color:#92400e;margin-bottom:8px}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-15 · Ch10 Graphs</div>
+  <h1>Euler Path/Circuit vs Hamilton Path/Circuit</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<div class="card">
+  <h2>先分清楚，Euler 走边，Hamilton 走点</h2>
+
+  <table>
+    <tr><th></th><th>Euler</th><th>Hamilton</th></tr>
+    <tr><th>经过什么</th><td>每条<strong>边</strong>恰好一次</td><td>每个<strong>顶点</strong>恰好一次</td></tr>
+    <tr><th>Path vs Circuit</th><td>起点 $\neq$ 终点 → Euler path<br>起点 $=$ 终点 → Euler circuit</td><td>起点 $\neq$ 终点 → Hamilton path<br>起点 $=$ 终点 → Hamilton circuit</td></tr>
+    <tr><th>是否有判定定理</th><td class="good">有，充要条件</td><td class="bad">没有，只有充分/必要条件</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Euler：充要条件（直接判定）</h2>
+
+  <div class="def">
+    <div class="label">Theorem 1 — Euler Circuit</div>
+    <p>连通多重图有 Euler circuit $\iff$ <strong>所有顶点度数为偶数</strong>。</p>
+  </div>
+
+  <div class="def" style="margin-top:12px">
+    <div class="label">Theorem 2 — Euler Path</div>
+    <p>连通多重图有 Euler path（无 Euler circuit）$\iff$ <strong>恰好 2 个奇度顶点</strong>。这两个点就是起点和终点。</p>
+  </div>
+
+  <p style="margin-top:12px"><strong>做题步骤</strong>：数每个顶点的度数 → 全是偶数 → Euler circuit；恰好 2 个奇数 → Euler path；其他 → 都没有。</p>
+</div>
+
+<div class="card">
+  <h2>Hamilton：只有充分条件（不能直接判定不存在）</h2>
+
+  <div class="def">
+    <div class="label">Dirac's Theorem（充分条件）</div>
+    <p>简单图 $G$ 有 $n \ge 3$ 个顶点。若 $\min \deg(v) \ge n/2$，则 $G$ 有 <strong>Hamilton circuit</strong>。</p>
+  </div>
+
+  <div class="def" style="margin-top:12px">
+    <div class="label">Ore's Theorem（充分条件，更强）</div>
+    <p>若对所有不相邻的 $u,v$，$\deg(u) + \deg(v) \ge n$，则 $G$ 有 Hamilton circuit。</p>
+  </div>
+
+  <div class="box" style="margin-top:12px">
+    <div class="title">重要注意</div>
+    <p>Dirac/Ore <strong>不满足不代表没有</strong> Hamilton circuit！它们只是充分条件。要证明没有 Hamilton circuit，需要用 Grinberg's Theorem 或其他矛盾论证。</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>必要条件（证明不存在用）</h2>
+  <p>若 $G$ 有 Hamilton circuit，则删除任意 $k$ 个顶点后，剩下的连通分量数 $\le k$。</p>
+  <p style="margin-top:4px;color:var(--muted)">用这个：删掉 $k$ 个点后发现连通分量 > $k$ → 一定没有 Hamilton circuit。</p>
+</div>
+
+<div class="card">
+  <h2>快速对比表</h2>
+  <table>
+    <tr><th></th><th>Euler</th><th>Hamilton</th></tr>
+    <tr><td>走什么</td><td>边</td><td>点</td></tr>
+    <tr><td>判定</td><td class="good">充要，度数即可</td><td class="bad">无充要条件</td></tr>
+    <tr><td>存在性判定</td><td class="good">度数全偶 → 有 circuit<br>恰好 2 奇度 → 有 path</td><td class="bad">Dirac/Ore 满足 → 有<br>不满足 → 不一定</td></tr>
+    <tr><td>不存在性判定</td><td class="good">奇度顶点 $\neq$ 0 或 2 → 无</td><td class="bad">删 $k$ 个点后连通分量 $>k$ → 无</td></tr>
+  </table>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-14.html">← QA-14 Chromatic Number</a>
+    <a href="../notes/Ch10-10.5-Euler-and-Hamilton-Paths.md">📖 笔记: Ch10-10.5</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>

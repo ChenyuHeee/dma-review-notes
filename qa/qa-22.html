@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA-22: Functions & Big-O</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px}
+.container{max-width:780px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:28px 32px;border-radius:12px;margin-bottom:24px}
+header .qa-id{font-size:.85rem;opacity:.8}
+header h1{font-size:1.4rem;margin:6px 0}
+.card{background:var(--card);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:24px 28px;margin-bottom:20px}
+.card h2{font-size:1.1rem;color:var(--accent);margin-bottom:12px}
+.def{background:#f8fafc;border-left:4px solid var(--accent);padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.88rem}
+th,td{padding:8px 12px;text-align:center;border-bottom:1px solid #dee2e6}
+th{background:#f1f5f9;font-weight:600}
+tr:nth-child(even){background:#fafafa}
+.vs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:12px 0}
+.vs>div{background:#f8fafc;border-radius:8px;padding:14px 18px;text-align:center}
+.vs>div h4{color:var(--accent);margin-bottom:6px}
+.box{background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:16px 20px;margin:12px 0}
+.box .title{font-weight:700;color:#92400e;margin-bottom:8px}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.82rem}
+nav a{color:var(--accent);text-decoration:none;margin:0 8px}
+nav a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="qa-id">QA-22 · Ch2 + Ch3</div>
+  <h1>Functions（函数类型）& Big-O 渐进记号</h1>
+  <div class="meta" style="font-size:.82rem;opacity:.7;margin-top:4px">2026-06-27</div>
+</header>
+
+<!-- ====== FUNCTIONS ====== -->
+<div class="card">
+  <h2>Part 1: Injective / Surjective / Bijective</h2>
+
+  <div class="vs">
+    <div>
+      <h4>Injective（单射）</h4>
+      <p>不同输入 → 不同输出</p>
+      <p style="font-size:.85rem;color:var(--muted)">$f(x)=f(y) \Rightarrow x=y$</p>
+    </div>
+    <div>
+      <h4>Surjective（满射）</h4>
+      <p>陪域中每个值都被打到</p>
+      <p style="font-size:.85rem;color:var(--muted)">$\forall y \in B, \exists x \in A: f(x)=y$</p>
+    </div>
+    <div>
+      <h4>Bijective（双射）</h4>
+      <p>单射 + 满射</p>
+      <p style="font-size:.85rem;color:var(--muted)">一一对应</p>
+    </div>
+  </div>
+
+  <table style="margin-top:12px">
+    <tr><th>例子</th><th>定义域</th><th>陪域</th><th>Injective?</th><th>Surjective?</th><th>Bijective?</th></tr>
+    <tr><td>$f(x) = x^2$</td><td>$\mathbb{R}$</td><td>$\mathbb{R}$</td><td>❌ ($f(1)=f(-1)$)</td><td>❌ (负数打不到)</td><td>❌</td></tr>
+    <tr><td>$f(x) = 2x$</td><td>$\mathbb{R}$</td><td>$\mathbb{R}$</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>$f(x) = e^x$</td><td>$\mathbb{R}$</td><td>$\mathbb{R}^+$</td><td>✅</td><td>✅</td><td>✅</td></tr>
+  </table>
+</div>
+
+<!-- ====== CARDINALITY ====== -->
+<div class="card">
+  <h2>$|A|$ 是什么意思</h2>
+  <p>$|A|$ = 集合 $A$ 的 <strong>cardinality（基数）</strong> = $A$ 中元素的个数。有限集就是一个数字。无限集用 $\aleph_0$（可数无穷）等表示。</p>
+  <p style="margin-top:6px">$|A \times B| = |A| \cdot |B|$：笛卡尔积的基数 = 两个基数的乘积。</p>
+</div>
+
+<!-- ====== BIG-O ====== -->
+<div class="card">
+  <h2>Part 2: Big-O / Big-Ω / Big-Θ</h2>
+
+  <table>
+    <tr><th>记号</th><th>含义</th><th>定义</th></tr>
+    <tr><td>$f = O(g)$</td><td>$f$ 增长 <strong>不快于</strong> $g$</td><td>$\exists C, n_0: f(n) \le C \cdot g(n)$ for $n \ge n_0$</td></tr>
+    <tr><td>$f = \Omega(g)$</td><td>$f$ 增长 <strong>不慢于</strong> $g$</td><td>$\exists C, n_0: f(n) \ge C \cdot g(n)$ for $n \ge n_0$</td></tr>
+    <tr><td>$f = \Theta(g)$</td><td>$f$ 和 $g$ <strong>同阶</strong></td><td>$f = O(g)$ 且 $f = \Omega(g)$</td></tr>
+    <tr><td>$f = o(g)$</td><td>$f$ 增长 <strong>严格慢于</strong> $g$</td><td>$\lim_{n\to\infty} f(n)/g(n) = 0$</td></tr>
+  </table>
+
+  <div class="def" style="margin-top:12px">
+    <p><strong>记忆</strong>：O = 上界（≤），Ω = 下界（≥），Θ = 紧界（=），o = 严格上界（<）。</p>
+  </div>
+
+  <p style="margin-top:12px"><strong>例子</strong>：$f(n) = 3n^2 + 2n + 1$</p>
+  <p>$f = O(n^2)$ ✓（$3n^2+2n+1 \le 6n^2$ for large $n$）</p>
+  <p>$f = \Omega(n^2)$ ✓（$3n^2+2n+1 \ge 3n^2$）</p>
+  <p>$f = \Theta(n^2)$ ✓（上下界都是 $n^2$）</p>
+  <p>$f = o(n^3)$ ✓（$\lim f/n^3 = 0$）</p>
+</div>
+
+<div class="box">
+  <div class="title">常见函数增长率（从慢到快）</div>
+  <p>常数 < $\log n$ < $(\log n)^2$ < $\sqrt{n}$ < $n$ < $n\log n$ < $n^2$ < $n^3$ < $2^n$ < $n!$</p>
+</div>
+
+<footer>
+  <nav>
+    <a href="qa-index.html">📂 QA 索引</a>
+    <a href="qa-21.html">← QA-21 NAND/CNF/DNF</a>
+    <a href="../notes/Ch02-2.3-Functions.md">📖 笔记: Ch02-2.3</a>
+    <a href="../notes/Ch03-3.2-Growth-of-Functions.md">📖 笔记: Ch03-3.2</a>
+  </nav>
+  <p style="margin-top:8px">Generated 2026-06-27</p>
+</footer>
+
+</div>
+</body>
+</html>
