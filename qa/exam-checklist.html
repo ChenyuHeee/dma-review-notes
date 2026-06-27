@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DMA 历年真题考点总清单</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});});</script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#212529;--muted:#6c757d;--accent:#2563eb;--red:#dc2626;--green:#16a34a;--amber:#d97706}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:24px}
+.container{max-width:960px;margin:0 auto}
+header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:#fff;padding:32px 36px;border-radius:14px;margin-bottom:28px}
+header h1{font-size:1.5rem}
+header .sub{font-size:.85rem;opacity:.8;margin-top:6px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.stat{background:var(--card);border-radius:10px;padding:16px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.stat .val{font-size:1.6rem;font-weight:700;color:var(--accent)}
+.stat .label{font-size:.78rem;color:var(--muted);margin-top:2px}
+.chapter{margin-bottom:24px}
+.chapter h2{font-size:1.15rem;color:var(--accent);padding:10px 16px;background:#eff6ff;border-radius:8px 8px 0 0;margin-bottom:0}
+.chapter h2 .freq{font-size:.8rem;color:var(--muted);font-weight:400;margin-left:8px}
+table{width:100%;border-collapse:collapse;font-size:.85rem;background:var(--card);border-radius:0 0 8px 8px;overflow:hidden}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid #f1f5f9}
+th{background:#f8fafc;font-weight:600;font-size:.78rem;color:var(--muted)}
+tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:1px 6px;border-radius:3px;font-size:.7rem;font-weight:600}
+.b-tf{background:#fef3c7;color:#92400e}
+.b-calc{background:#dbeafe;color:#1e40af}
+.b-proof{background:#fce7f3;color:#9d174d}
+.b-algo{background:#dcfce7;color:#166534}
+.star{color:#eab308}
+.highlight{background:#fef3c7;padding:0 3px}
+.top-table td,.top-table th{text-align:center}
+.top-table td:first-child,.top-table th:first-child{text-align:left}
+.c5{color:var(--red);font-weight:700}
+.c4{color:var(--red)}
+.c3{color:var(--amber)}
+.row-4{background:#fef2f2}
+.row-3{background:#fffbeb}
+footer{text-align:center;padding:24px;color:var(--muted);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>DMA 历年真题考点总清单</h1>
+  <div class="sub">郑文庭班 · Quiz1-4 (2022-2025) + 期末回忆卷 (2022) · 共 115 个考点</div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="val">115</div><div class="label">独特考点</div></div>
+  <div class="stat"><div class="val">Ch1/6/10</div><div class="label">最重三章 (94频次)</div></div>
+  <div class="stat"><div class="val">40%</div><div class="label">计算题占比</div></div>
+  <div class="stat"><div class="val">16</div><div class="label">高频考点 (≥3次)</div></div>
+</div>
+
+<!-- ============ TOP 16 ============ -->
+<div class="chapter">
+<h2>核心高频考点 TOP 16 (出现 ≥3 次)</h2>
+<table class="top-table">
+<tr><th>#</th><th>考点</th><th>章节</th><th>频次</th><th>年份</th></tr>
+<tr class="row-4"><td>1</td><td>Full CNF 全合取范式</td><td>Ch1</td><td class="c5">4</td><td>22-25</td></tr>
+<tr class="row-4"><td>2</td><td>命题逻辑等价性判断</td><td>Ch1</td><td class="c5">4</td><td>22-25</td></tr>
+<tr class="row-4"><td>3</td><td>联结词归约 (NAND/NOR)</td><td>Ch1</td><td class="c5">4</td><td>22-25</td></tr>
+<tr class="row-4"><td>4</td><td>非齐次线性递推求解</td><td>Ch8</td><td class="c5">4</td><td>22-期末</td></tr>
+<tr class="row-4"><td>5</td><td>平面图欧拉公式</td><td>Ch10</td><td class="c5">4</td><td>22-期末</td></tr>
+<tr class="row-3"><td>6</td><td>谓词逻辑翻译</td><td>Ch1</td><td class="c3">3</td><td>22,24</td></tr>
+<tr class="row-3"><td>7</td><td>Full DNF 全析取范式</td><td>Ch1</td><td class="c3">3</td><td>22-24</td></tr>
+<tr class="row-3"><td>8</td><td>集合运算恒等式判断</td><td>Ch2</td><td class="c3">3</td><td>22,23,25</td></tr>
+<tr class="row-3"><td>9</td><td>Cantor 对角线论证</td><td>Ch2</td><td class="c3">3</td><td>22,24,25</td></tr>
+<tr class="row-3"><td>10</td><td>Big-O 概念判断</td><td>Ch3</td><td class="c3">3</td><td>22,24,25</td></tr>
+<tr class="row-3"><td>11</td><td>中国剩余定理 CRT</td><td>Ch4</td><td class="c3">3</td><td>23-25</td></tr>
+<tr class="row-3"><td>12</td><td>多重集组合</td><td>Ch6</td><td class="c3">3</td><td>23-期末</td></tr>
+<tr class="row-3"><td>13</td><td>Kruskal 最小生成树</td><td>Ch11</td><td class="c3">3</td><td>22-期末</td></tr>
+<tr class="row-3"><td>14</td><td>Huffman 编码</td><td>Ch11</td><td class="c3">3</td><td>22-期末</td></tr>
+<tr class="row-3"><td>15</td><td>鸽巢原理</td><td>Ch6</td><td class="c3">3</td><td>22,24</td></tr>
+<tr class="row-3"><td>16</td><td>图的着色 (色数)</td><td>Ch10</td><td class="c3">3</td><td>22-24</td></tr>
+</table>
+</div>
+
+<!-- ============ Ch1 ============ -->
+<div class="chapter">
+<h2>Ch1: 命题逻辑与谓词逻辑 <span class="freq">16 考点 / 34 频次</span></h2>
+<table>
+<tr><th>考点</th><th>年份</th><th width="50">频次</th><th width="70">形式</th><th width="50">难度</th></tr>
+<tr><td>命题逻辑等价性判断 (T/F)</td><td>22,23,24,25</td><td>4</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★</span></td></tr>
+<tr><td>重言式/矛盾式判断</td><td>22,23</td><td>2</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★</span></td></tr>
+<tr><td>双条件真值判断</td><td>24</td><td>1</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★</span></td></tr>
+<tr><td>命题等价变换 (用 ¬∧ 表达 ∨ 等)</td><td>22,23,24,25</td><td>4</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>NAND 功能完全性</td><td>22,24,25</td><td>3</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>NOR 功能完全性</td><td>23</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>用 NAND 表达 XOR</td><td>25</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>Full DNF 全析取范式</td><td>22,23,24</td><td>3</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>Full CNF 全合取范式</td><td>22,23,24,25</td><td>4</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>谓词逻辑自然语言翻译</td><td>22,24</td><td>2</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>量词等价判断</td><td>23,25</td><td>2</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>量词分配律 (∀对∧ / ∃对∨)</td><td>23</td><td>1</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>量词真值表判定 (∀x∃y)</td><td>25</td><td>1</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>量词否定 (De Morgan)</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>辖域扩张/约束变元换名</td><td>25</td><td>1</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>逆否命题证明法</td><td>24</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★</span></td></tr>
+</table>
+</div>
+
+<!-- ============ Ch2 ============ -->
+<div class="chapter">
+<h2>Ch2: 集合与函数 <span class="freq">12 考点 / 22 频次</span></h2>
+<table>
+<tr><th>考点</th><th>年份</th><th width="50">频次</th><th width="70">形式</th><th width="50">难度</th></tr>
+<tr><td>集合运算恒等式判断</td><td>22,23,25</td><td>3</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★</span></td></tr>
+<tr><td>幂集性质</td><td>22,23</td><td>2</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>对称差运算结合律</td><td>24,期末</td><td>2</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★</span></td></tr>
+<tr><td>Cantor 对角线论证</td><td>22,24,25</td><td>3</td><td><span class="badge b-proof">证明+T/F</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>可数性判断</td><td>23,24</td><td>2</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>集合势比较</td><td>23,期末</td><td>2</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>可数无穷</td><td>24</td><td>1</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★</span></td></tr>
+<tr><td>函数复合</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★</span></td></tr>
+<tr><td>函数映射分类 (injective/surjective/bijective)</td><td>25</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★</span></td></tr>
+<tr><td>取整函数性质判断</td><td>25</td><td>1</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★</span></td></tr>
+<tr><td>取整函数+集合基数</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>集合分配律推广的归纳证明</td><td>22,25</td><td>2</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+</table>
+</div>
+
+<!-- ============ Ch3 ============ -->
+<div class="chapter">
+<h2>Ch3: 算法复杂度 <span class="freq">4 考点 / 7 频次</span></h2>
+<table>
+<tr><th>考点</th><th>年份</th><th width="50">频次</th><th width="70">形式</th><th width="50">难度</th></tr>
+<tr><td>Big-O 概念判断</td><td>22,24,25</td><td>3</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>算法最佳/最差/平均情况</td><td>22</td><td>1</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★</span></td></tr>
+<tr><td>函数增长率排序</td><td>23,24</td><td>2</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>Dijkstra 时间复杂度</td><td>24</td><td>1</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★★</span></td></tr>
+</table>
+</div>
+
+<!-- ============ Ch4 ============ -->
+<div class="chapter">
+<h2>Ch4: 数论 <span class="freq">8 考点 / 13 频次</span></h2>
+<table>
+<tr><th>考点</th><th>年份</th><th width="50">频次</th><th width="70">形式</th><th width="50">难度</th></tr>
+<tr><td>费马小定理</td><td>23,25</td><td>2</td><td><span class="badge b-tf">T/F+计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>模幂运算 (快速幂)</td><td>23</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>中国剩余定理 (CRT) 标准构造</td><td>23,24,25</td><td>3</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>CRT 应用 — 连续整除</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>欧拉函数 φ(n) 与缩系</td><td>25</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>完全平方数/因子个数</td><td>23</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>和差整除子集构造</td><td>期末</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>序列整除性</td><td>23</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+</table>
+</div>
+
+<!-- ============ Ch5 ============ -->
+<div class="chapter">
+<h2>Ch5: 归纳与递归 <span class="freq">9 考点 / 10 频次</span></h2>
+<table>
+<tr><th>考点</th><th>年份</th><th width="50">频次</th><th width="70">形式</th><th width="50">难度</th></tr>
+<tr><td>不等式归纳证明</td><td>22,24</td><td>2</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>斐波那契模 5 整除性</td><td>23</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>斐波那契恒等式</td><td>23</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>强归纳法 — Zeckendorf 表示</td><td>22,25</td><td>2</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>球合并问题</td><td>期末</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>红绿点配对连线</td><td>24</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>竞赛图哈密顿路径</td><td>22</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>斐波那契整除 (含鸽巢)</td><td>23</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>归纳法 — 集合分配律推广</td><td>22,25</td><td>2</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+</table>
+</div>
+
+<!-- ============ Ch6 ============ -->
+<div class="chapter">
+<h2>Ch6: 计数 <span class="freq">19 考点 / 27 频次</span></h2>
+<table>
+<tr><th>考点</th><th>年份</th><th width="50">频次</th><th width="70">形式</th><th width="50">难度</th></tr>
+<tr><td>字典序排列后继</td><td>22,23</td><td>2</td><td><span class="badge b-algo">算法</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>字典序组合后继</td><td>22,23</td><td>2</td><td><span class="badge b-algo">算法</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>字符串计数 (容斥/位置)</td><td>22</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>二项式定理展开系数</td><td>22</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>广义二项式系数</td><td>23</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>多项式定理展开系数</td><td>23</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>球盒模型</td><td>23</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>多重集组合 (整数拆分)</td><td>23,24,期末</td><td>3</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>扑克牌牌型计数</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>鸽巢原理基本应用</td><td>22,24</td><td>2</td><td><span class="badge b-calc">计算+证明</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>鸽巢原理 — 顺子/对子</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>容斥原理字符串计数</td><td>期末</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>容斥原理多条件并集</td><td>期末</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>Almost-palindrome 计数</td><td>22</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>Hall 婚姻定理</td><td>24</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>集合计数</td><td>期末</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>非降序列计数</td><td>期末</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★</span></td></tr>
+<tr><td>球队分组计数</td><td>期末</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>8 名 8 题鸽巢证明</td><td>24</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+</table>
+</div>
+
+<!-- ============ Ch8 ============ -->
+<div class="chapter">
+<h2>Ch8: 递推关系与生成函数 <span class="freq">7 考点 / 11 频次</span></h2>
+<table>
+<tr><th>考点</th><th>年份</th><th width="50">频次</th><th width="70">形式</th><th width="50">难度</th></tr>
+<tr><td>生成函数 → 序列前 n 项</td><td>22,23</td><td>2</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>齐次线性递推求解 (特征方程)</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>非齐次线性递推求解</td><td>22,23,22Q4,期末</td><td>4</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>生成函数解齐次递推</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>生成函数变换 (导数/平移)</td><td>期末</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>生成函数 → 通项 (部分分式)</td><td>期末</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>待定系数法反推递推</td><td>22</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+</table>
+</div>
+
+<!-- ============ Ch9 ============ -->
+<div class="chapter">
+<h2>Ch9: 关系 <span class="freq">10 考点 / 15 频次</span></h2>
+<table>
+<tr><th>考点</th><th>年份</th><th width="50">频次</th><th width="70">形式</th><th width="50">难度</th></tr>
+<tr><td>传递闭包 (Warshall 算法)</td><td>22,期末</td><td>2</td><td><span class="badge b-algo">算法</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>自反/对称/传递闭包构造</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>偏序关系 — 最小偏序</td><td>22,24</td><td>2</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>Hasse 图绘制</td><td>22,24</td><td>2</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>极大/极小/最大/最小元</td><td>22,24</td><td>2</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★</span></td></tr>
+<tr><td>LUB / GLB 最小上界/最大下界</td><td>22,24</td><td>2</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>拓扑排序</td><td>22</td><td>1</td><td><span class="badge b-algo">算法</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>等价关系计数 (Bell 数)</td><td>22,24</td><td>2</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>关系性质计数 (自反/对称/传递)</td><td>22</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>偏序关系计数</td><td>期末</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★★</span></td></tr>
+</table>
+</div>
+
+<!-- ============ Ch10 ============ -->
+<div class="chapter">
+<h2>Ch10: 图论 <span class="freq">22 考点 / 33 频次</span></h2>
+<table>
+<tr><th>考点</th><th>年份</th><th width="50">频次</th><th width="70">形式</th><th width="50">难度</th></tr>
+<tr><td>Dijkstra 最短路径</td><td>22</td><td>1</td><td><span class="badge b-algo">算法</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>最短路径 — 离心率</td><td>期末</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>图同构判断</td><td>22,24</td><td>2</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>欧拉回路/通路判定</td><td>22,24</td><td>2</td><td><span class="badge b-calc">计算+证明</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>哈密顿回路/通路判定</td><td>22,24</td><td>2</td><td><span class="badge b-calc">计算+证明</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>超立方体 $Q_n$ 性质</td><td>24,期末</td><td>2</td><td><span class="badge b-calc">计算+证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>$Q_5$ 边数/色数/哈密顿</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>竞赛图哈密顿路径</td><td>22</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>Petersen 图色数</td><td>22</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>Petersen 图非平面</td><td>22</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>Petersen 图非哈密顿</td><td>22</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>$K_{r,s}$ 平面性判定</td><td>22</td><td>1</td><td><span class="badge b-calc">计算+证明</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>平面图欧拉公式应用</td><td>22,22Q4,24Q4,期末</td><td>4</td><td><span class="badge b-calc">计算+证明</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>正多面体分类</td><td>22</td><td>1</td><td><span class="badge b-proof">证明</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>平面图区域数</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★</span></td></tr>
+<tr><td>图的着色 (色数)</td><td>22,22Q4,24</td><td>3</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>最大流/最小割</td><td>24</td><td>1</td><td><span class="badge b-algo">算法</span></td><td><span class="star">★★★</span></td></tr>
+<tr><td>握手定理</td><td>期末</td><td>1</td><td><span class="badge b-tf">T/F</span></td><td><span class="star">★</span></td></tr>
+<tr><td>强连通分量 (SCC)</td><td>期末</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>邻接矩阵路径计数</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>最小支配集</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>网格图生成树计数</td><td>22</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★</span></td></tr>
+</table>
+</div>
+
+<!-- ============ Ch11 ============ -->
+<div class="chapter">
+<h2>Ch11: 树 <span class="freq">8 考点 / 13 频次</span></h2>
+<table>
+<tr><th>考点</th><th>年份</th><th width="50">频次</th><th width="70">形式</th><th width="50">难度</th></tr>
+<tr><td>Kruskal 最小生成树</td><td>22,24,期末</td><td>3</td><td><span class="badge b-algo">算法</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>Prim 最小生成树</td><td>22</td><td>1</td><td><span class="badge b-algo">算法</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>MST 字典序</td><td>期末</td><td>1</td><td><span class="badge b-algo">算法</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>Huffman 编码</td><td>22,24,期末</td><td>3</td><td><span class="badge b-algo">算法</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>DFS 生成树</td><td>24</td><td>1</td><td><span class="badge b-algo">算法</span></td><td><span class="star">★★</span></td></tr>
+<tr><td>满 m-ary 树叶子数</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★</span></td></tr>
+<tr><td>$K_{r,s}$ 树判定</td><td>24</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★</span></td></tr>
+<tr><td>树的内点/叶子/度数</td><td>期末</td><td>1</td><td><span class="badge b-calc">计算</span></td><td><span class="star">★★</span></td></tr>
+</table>
+</div>
+
+<footer>Generated 2026-06-27 · 郑文庭班 DMA 期末复习</footer>
+
+</div>
+</body>
+</html>
